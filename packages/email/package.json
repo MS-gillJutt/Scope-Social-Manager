@@ -1,0 +1,41 @@
+{
+  "name": "@postlane/email",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Transactional email templates and send utility for Postlane",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./templates/*": {
+      "types": "./dist/templates/*.d.ts",
+      "import": "./dist/templates/*.js"
+    },
+    "./send": {
+      "types": "./dist/send.d.ts",
+      "import": "./dist/send.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@postlane/config": "workspace:*",
+    "@react-email/components": "^0.0.15",
+    "@react-email/render": "^0.0.12",
+    "nodemailer": "^6.9.9",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/nodemailer": "^6.4.14",
+    "@types/react": "^18.2.48",
+    "typescript": "^5.3.3"
+  }
+}

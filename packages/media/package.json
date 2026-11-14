@@ -1,0 +1,54 @@
+{
+  "name": "@postlane/media",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Media processing and storage engine for Postlane",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./storage": {
+      "types": "./dist/storage/r2.service.d.ts",
+      "import": "./dist/storage/r2.service.js"
+    },
+    "./processors": {
+      "types": "./dist/processors/image.processor.d.ts",
+      "import": "./dist/processors/image.processor.js"
+    },
+    "./validation": {
+      "types": "./dist/validation/media.validation.d.ts",
+      "import": "./dist/validation/media.validation.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "sharp": "^0.33.2",
+    "fluent-ffmpeg": "^2.1.3",
+    "@aws-sdk/client-s3": "^3.503.1",
+    "@aws-sdk/s3-request-presigner": "^3.503.1",
+    "@aws-sdk/lib-storage": "^3.503.1",
+    "@postlane/config": "workspace:*",
+    "@postlane/shared": "workspace:*",
+    "mime-types": "^2.1.35",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/mime-types": "^2.1.4",
+    "@types/uuid": "^9.0.7",
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}

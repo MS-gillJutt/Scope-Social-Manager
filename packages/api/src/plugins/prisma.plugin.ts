@@ -1,0 +1,28 @@
+import fp from 'fastify-plugin';
+import { FastifyInstance } from 'fastify';
+import { PrismaClient } from '@postlane/db';
+
+declare module 'fastify' {
+  interface FastifyInstance {
+    prisma: PrismaClient;
+  }
+}
+
+export default fp(async function prismaPlugin(fastify: FastifyInstance) {
+  const prisma = new PrismaClient({
+    log:
+      process.env.NODE_ENV === 'development'
+        ? ['query', 'info', 'warn', 'error']
+        : ['warn', 'error'],
+  });
+
+  await prisma.$connect();
+  fastify.log.info('Prisma connected to database');
+
+  fastify.decorate('prisma', prisma);
+
+  fastify.addHook('onClose', async () => {
+    await prisma.$disconnect();
+    fastify.log.info('Prisma disconnected');
+  });
+});

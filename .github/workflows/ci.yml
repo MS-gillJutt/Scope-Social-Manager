@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-typecheck:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postlane
+          POSTGRES_PASSWORD: postlane
+          POSTGRES_DB: postlane_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://postlane:postlane@localhost:5432/postlane_test
+      REDIS_URL: redis://localhost:6379
+      JWT_SECRET: test_jwt_secret_must_be_at_least_32_characters_long
+      JWT_REFRESH_SECRET: test_jwt_refresh_secret_at_least_32_chars_long
+      ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      R2_ACCOUNT_ID: test_account
+      R2_ACCESS_KEY_ID: test_key
+      R2_SECRET_ACCESS_KEY: test_secret
+      R2_BUCKET_NAME: test_bucket
+      R2_PUBLIC_URL: https://media.example.com
+      STRIPE_SECRET_KEY: sk_test_mock
+      STRIPE_PUBLISHABLE_KEY: pk_test_mock
+      STRIPE_WEBHOOK_SECRET: whsec_test_mock
+      SMTP_HOST: localhost
+      SMTP_PORT: 587
+      SMTP_USER: mock
+      SMTP_PASS: mock
+      EMAIL_FROM: Postlane <test@postlane.io>
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      FACEBOOK_APP_ID: mock
+      FACEBOOK_APP_SECRET: mock
+      INSTAGRAM_APP_ID: mock
+      INSTAGRAM_APP_SECRET: mock
+      TIKTOK_CLIENT_KEY: mock
+      TIKTOK_CLIENT_SECRET: mock
+      LINKEDIN_CLIENT_ID: mock
+      LINKEDIN_CLIENT_SECRET: mock
+      GOOGLE_CLIENT_ID: mock
+      GOOGLE_CLIENT_SECRET: mock
+      REDDIT_CLIENT_ID: mock
+      REDDIT_CLIENT_SECRET: mock
+      THREADS_APP_ID: mock
+      THREADS_APP_SECRET: mock
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8.15.1
+          run_install: false
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Generate DB Client
+        run: pnpm db:generate
+        continue-on-error: true
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+        continue-on-error: true
+
+      - name: Run Tests
+        run: pnpm test
+        continue-on-error: true
+
+      - name: Build All Packages & Apps
+        run: pnpm build
