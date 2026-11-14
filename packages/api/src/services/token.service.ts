@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@postlane/db';
+import { PrismaClient, User } from '@scope/db';
 import { FastifyInstance } from 'fastify';
 import crypto from 'crypto';
 import { AuthError } from '../utils/errors.js';

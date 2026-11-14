@@ -18,7 +18,7 @@ export class R2Service {
 
   constructor(client: S3Client = r2Client, bucketName?: string, publicUrl?: string) {
     this.client = client;
-    this.bucketName = bucketName || process.env.R2_BUCKET_NAME || 'postlane-media';
+    this.bucketName = bucketName || process.env.R2_BUCKET_NAME || 'scope-media';
     this.publicUrl = publicUrl || process.env.R2_PUBLIC_URL || '';
   }
 

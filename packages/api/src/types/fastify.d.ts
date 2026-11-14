@@ -1,4 +1,4 @@
-import { PrismaClient, User, WorkspaceMember } from '@postlane/db';
+import { PrismaClient, User, WorkspaceMember } from '@scope/db';
 import { Redis } from 'ioredis';
 
 declare module 'fastify' {

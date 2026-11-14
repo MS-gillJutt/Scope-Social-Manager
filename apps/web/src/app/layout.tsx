@@ -17,9 +17,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Postlane — One Lane. Every Platform. Social Media Management",
+  title: "Scope Social Manager — One Lane. Every Platform. Social Media Management",
   description:
-    "Postlane is the unified social media command center for creators, brands, and agencies. Create once, tailor per network with native specs, and schedule across Facebook, Instagram, TikTok, LinkedIn, YouTube, Threads, and Reddit.",
+    "Scope Social Manager is the unified social media command center for creators, brands, and agencies. Create once, tailor per network with native specs, and schedule across Facebook, Instagram, TikTok, LinkedIn, YouTube, Threads, and Reddit.",
   keywords: [
     "social media management",
     "social scheduler",
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
     "youtube shorts scheduling",
     "social media agency tool",
   ],
-  authors: [{ name: "Postlane Team" }],
+  authors: [{ name: "Scope Social Manager Team" }],
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#0f172a",
   openGraph: {
-    title: "Postlane — One lane. Every platform.",
+    title: "Scope Social Manager — One lane. Every platform.",
     description:
       "Schedule smarter, publish everywhere. Unified Composer, Visual Calendar, Multi-tenant Workspaces, and Official API integrations.",
     type: "website",
-    url: "https://postlane.io",
+    url: "https://scopesocialmanager.com",
   },
 };
 

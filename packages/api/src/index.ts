@@ -133,7 +133,7 @@ export async function buildApp() {
   app.get('/health', async () => {
     return {
       status: 'ok',
-      service: '@postlane/api',
+      service: '@scope/api',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
     };
@@ -156,7 +156,7 @@ async function start() {
     const app = await buildApp();
 
     await app.listen({ port, host });
-    app.log.info(`🚀 Postlane API Server running at http://${host}:${port}`);
+    app.log.info(`🚀 Scope Social Manager API Server running at http://${host}:${port}`);
 
     // Graceful Shutdown Handlers
     const signals = ['SIGINT', 'SIGTERM'];
@@ -174,7 +174,7 @@ async function start() {
       });
     }
   } catch (err) {
-    console.error('Fatal error starting Postlane API server:', err);
+    console.error('Fatal error starting Scope Social Manager API server:', err);
     process.exit(1);
   }
 }

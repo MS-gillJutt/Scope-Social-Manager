@@ -51,7 +51,7 @@ export const PLATFORMS_DATA: PlatformInfo[] = [
     color: "#00F2FE",
     badge: "TikTok Partner API",
     apiName: "TikTok Content Posting API v2",
-    description: "Direct to Feed and Draft inbox publishing. Control Duet, Stitch, and comment permissions natively from Postlane.",
+    description: "Direct to Feed and Draft inbox publishing. Control Duet, Stitch, and comment permissions natively from Scope Social Manager.",
     features: [
       "Direct feed video publishing",
       "Stitch, Duet & Comment privacy toggles",

@@ -32,7 +32,7 @@ const processQueue = (error: unknown, token: string | null = null) => {
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("postlane_access_token");
+      const token = localStorage.getItem("scope_access_token");
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -71,7 +71,7 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
       isRefreshing = true;
 
-      const refreshToken = localStorage.getItem("postlane_refresh_token");
+      const refreshToken = localStorage.getItem("scope_refresh_token");
 
       if (!refreshToken) {
         isRefreshing = false;
@@ -85,7 +85,7 @@ apiClient.interceptors.response.use(
         });
 
         const newAccessToken = data.accessToken;
-        localStorage.setItem("postlane_access_token", newAccessToken);
+        localStorage.setItem("scope_access_token", newAccessToken);
 
         if (originalRequest.headers) {
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -95,8 +95,8 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError, null);
-        localStorage.removeItem("postlane_access_token");
-        localStorage.removeItem("postlane_refresh_token");
+        localStorage.removeItem("scope_access_token");
+        localStorage.removeItem("scope_refresh_token");
         if (typeof window !== "undefined") {
           window.location.href = "/login";
         }

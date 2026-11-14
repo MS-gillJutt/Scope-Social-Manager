@@ -1,5 +1,5 @@
 {
-  "name": "@postlane/integrations",
+  "name": "@scope/integrations",
   "version": "0.1.0",
   "type": "module",
   "main": "./src/index.ts",
@@ -16,8 +16,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@postlane/shared": "workspace:*",
-    "@postlane/config": "workspace:*",
+    "@scope/shared": "workspace:*",
+    "@scope/config": "workspace:*",
     "axios": "^1.6.7",
     "zod": "^3.22.4"
   },

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Section, Text } from "@react-email/components";
 import { EmailLayout } from "./layout.js";
-import { BRAND } from "@postlane/config";
+import { BRAND } from "@scope/config";
 
 export interface ResetPasswordProps {
   name: string;
@@ -14,7 +14,7 @@ export const ResetPassword: React.FC<ResetPasswordProps> = ({
 }) => {
   return (
     <EmailLayout
-      previewText="Reset your Postlane password"
+      previewText="Reset your Scope Social Manager password"
       heading="Reset your password"
     >
       <Text style={text}>Hi {name},</Text>

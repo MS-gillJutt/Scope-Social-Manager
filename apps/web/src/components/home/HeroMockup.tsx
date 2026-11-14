@@ -32,7 +32,7 @@ export function HeroMockup() {
           <div className="h-3 w-3 rounded-full bg-rose-500/80" />
           <div className="h-3 w-3 rounded-full bg-amber-500/80" />
           <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
-          <span className="ml-2 text-xs font-mono text-slate-400">app.postlane.io/workspace/acme-growth</span>
+          <span className="ml-2 text-xs font-mono text-slate-400">app.scopesocialmanager.com/workspace/acme-growth</span>
         </div>
 
         {/* Mock View Switcher */}
@@ -105,7 +105,7 @@ export function HeroMockup() {
             {/* Main Textarea Mockup */}
             <div className="rounded-xl border border-slate-700/80 bg-slate-950/60 p-4 space-y-3">
               <div className="text-sm text-slate-200 leading-relaxed font-sans">
-                Excited to announce the Postlane 2.0 release! 🚀
+                Excited to announce the Scope Social Manager 2.0 release! 🚀
                 <br />
                 We built one unified command center to streamline your cross-platform social publishing with native API specs, zero manual re-formatting, and intelligent scheduling.
                 <br /><br />
@@ -204,7 +204,7 @@ export function HeroMockup() {
                     Product Reveal
                   </span>
                   <div className="text-sm font-bold text-white">
-                    Postlane 2.0 Command Center
+                    Scope Social Manager 2.0 Command Center
                   </div>
                 </div>
               </div>

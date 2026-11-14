@@ -164,7 +164,7 @@ export function AdminHeader({ currentEnv = "production" }: AdminHeaderProps) {
             <div className="absolute right-0 mt-2 w-56 bg-[#0f172a] border border-[#1e293b] rounded-xl shadow-2xl z-50 p-2">
               <div className="px-3 py-2 border-b border-[#1e293b] mb-1">
                 <p className="text-xs font-semibold text-white">Alex Turner</p>
-                <p className="text-[11px] text-slate-400 font-mono truncate">owner@postlane.io</p>
+                <p className="text-[11px] text-slate-400 font-mono truncate">owner@scopesocialmanager.com</p>
                 <span className="inline-block mt-1 text-[9px] uppercase tracking-wider font-bold bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-500/30">
                   Root Super Administrator
                 </span>

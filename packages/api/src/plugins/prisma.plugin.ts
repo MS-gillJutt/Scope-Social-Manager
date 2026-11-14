@@ -1,6 +1,6 @@
 import fp from 'fastify-plugin';
 import { FastifyInstance } from 'fastify';
-import { PrismaClient } from '@postlane/db';
+import { PrismaClient } from '@scope/db';
 
 declare module 'fastify' {
   interface FastifyInstance {

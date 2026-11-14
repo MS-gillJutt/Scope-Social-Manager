@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Section, Text } from "@react-email/components";
 import { EmailLayout } from "./layout.js";
-import { BRAND } from "@postlane/config";
+import { BRAND } from "@scope/config";
 
 export interface WelcomeEmailProps {
   name: string;
@@ -18,7 +18,7 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
       heading={`Welcome to ${BRAND.NAME}, ${name}! 👋`}
     >
       <Text style={text}>
-        We're thrilled to have you onboard. Postlane makes it easy to schedule,
+        We're thrilled to have you onboard. Scope Social Manager makes it easy to schedule,
         publish, and analyze your social media content across all your favorite
         networks from one seamless dashboard.
       </Text>
@@ -36,7 +36,7 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
         </Text>
         <Text style={listItem}>
           3️⃣ <strong>Schedule and automate:</strong> Choose the best time to
-          publish or let Postlane automate your queue.
+          publish or let Scope Social Manager automate your queue.
         </Text>
       </Section>
 

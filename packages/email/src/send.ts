@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import * as React from "react";
-import { env } from "@postlane/config";
+import { env } from "@scope/config";
 
 // Singleton transport instance
 let transporter: nodemailer.Transporter | null = null;

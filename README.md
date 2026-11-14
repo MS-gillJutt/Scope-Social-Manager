@@ -1,4 +1,4 @@
-# Postlane
+# Scope Social Manager
 
 > **Multi-tenant Social Media Management SaaS** — Schedule, publish, and analyse content across every major social platform from a single workspace.
 
@@ -54,7 +54,7 @@ scope-social-manager/
 └── .github/            # CI workflow, issue & PR templates
 ```
 
-> Internal package scope is `@postlane/*` (original code name). See [`docs/ROADMAP.md`](docs/ROADMAP.md) for current progress.
+> Internal package scope is `@scope/*`. Progress: [`docs/ROADMAP.md`](docs/ROADMAP.md) · Running costs: [`docs/COSTS.md`](docs/COSTS.md)
 
 ---
 

@@ -434,7 +434,7 @@ export default function AdminDashboardPage() {
 
           <div className="mt-6 pt-4 border-t border-[#1e293b] text-center">
             <span className="text-[11px] text-slate-500 font-mono">
-              Postlane Super Admin Node: i-08f32ac99b (us-east-1)
+              Scope Social Manager Super Admin Node: i-08f32ac99b (us-east-1)
             </span>
           </div>
         </div>

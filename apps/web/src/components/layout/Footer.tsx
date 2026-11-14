@@ -27,7 +27,7 @@ export function Footer() {
                 <Share2 className="w-5 h-5" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                Postlane
+                Scope Social Manager
               </span>
             </Link>
             <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
@@ -171,7 +171,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {currentYear} Postlane Inc. All rights reserved. Built for modern growth teams and agencies.</p>
+          <p>© {currentYear} Scope Social Manager Inc. All rights reserved. Built for modern growth teams and agencies.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-slate-400">
               <Zap className="w-3.5 h-3.5 text-brand-400" /> 99.99% Guaranteed Dispatch SLA

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Section, Text } from "@react-email/components";
 import { EmailLayout } from "./layout.js";
-import { BRAND } from "@postlane/config";
+import { BRAND } from "@scope/config";
 
 export interface VerifyEmailProps {
   name: string;
@@ -14,7 +14,7 @@ export const VerifyEmail: React.FC<VerifyEmailProps> = ({
 }) => {
   return (
     <EmailLayout
-      previewText="Verify your email address for Postlane"
+      previewText="Verify your email address for Scope Social Manager"
       heading="Verify your email address"
     >
       <Text style={text}>Hi {name},</Text>

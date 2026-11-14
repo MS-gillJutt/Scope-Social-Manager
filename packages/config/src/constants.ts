@@ -1,17 +1,17 @@
 // =============================================================================
-// Postlane — Application Constants
+// Scope Social Manager — Application Constants
 // =============================================================================
 
 // ---------------------------------------------------------------------------
 // Brand
 // ---------------------------------------------------------------------------
 export const BRAND = {
-  NAME: "Postlane",
+  NAME: "Scope Social Manager",
   TAGLINE: "Schedule smarter. Publish everywhere.",
   PRIMARY_COLOR: "#6366f1",
   SECONDARY_COLOR: "#0ea5e9",
-  SUPPORT_EMAIL: "support@postlane.io",
-  WEBSITE_URL: "https://postlane.io",
+  SUPPORT_EMAIL: "support@scopesocialmanager.com",
+  WEBSITE_URL: "https://scopesocialmanager.com",
 } as const;
 
 // ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-import type { Platform } from '@postlane/config';
+import type { Platform } from '@scope/config';
 
 export type { Platform };
 

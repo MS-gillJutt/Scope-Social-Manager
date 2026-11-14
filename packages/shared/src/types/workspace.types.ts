@@ -2,7 +2,7 @@
 // Workspace Types
 // =============================================================================
 
-import type { WorkspaceRole } from "@postlane/config";
+import type { WorkspaceRole } from "@scope/config";
 
 export interface Workspace {
   id: string;

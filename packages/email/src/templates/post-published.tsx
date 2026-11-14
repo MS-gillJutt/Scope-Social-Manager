@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Section, Text } from "@react-email/components";
 import { EmailLayout } from "./layout.js";
-import { BRAND } from "@postlane/config";
+import { BRAND } from "@scope/config";
 
 export interface PostPublishedProps {
   workspaceName: string;

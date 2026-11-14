@@ -1,4 +1,4 @@
-import { PrismaClient } from '@postlane/db';
+import { PrismaClient } from '@scope/db';
 
 /**
  * Converts a workspace name to a URL-safe slug.

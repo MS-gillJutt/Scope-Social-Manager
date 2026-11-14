@@ -2,7 +2,7 @@
 // Content / Post Types
 // =============================================================================
 
-import type { Platform, PostStatus } from "@postlane/config";
+import type { Platform, PostStatus } from "@scope/config";
 
 export interface MediaAttachment {
   id: string;

@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { MemberRole } from '@postlane/db';
+import { MemberRole } from '@scope/db';
 import { ForbiddenError } from '../utils/errors.js';
 
 /**

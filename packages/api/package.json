@@ -1,5 +1,5 @@
 {
-  "name": "@postlane/api",
+  "name": "@scope/api",
   "version": "0.1.0",
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -14,9 +14,9 @@
     "@fastify/jwt": "^8.0.1",
     "@fastify/multipart": "^8.1.0",
     "@fastify/cookie": "^9.3.1",
-    "@postlane/db": "workspace:*",
-    "@postlane/shared": "workspace:*",
-    "@postlane/config": "workspace:*",
+    "@scope/db": "workspace:*",
+    "@scope/shared": "workspace:*",
+    "@scope/config": "workspace:*",
     "bcrypt": "^5.1.1",
     "speakeasy": "^2.0.0",
     "qrcode": "^1.5.3",

@@ -1,8 +1,8 @@
 {
-  "name": "@postlane/config",
+  "name": "@scope/config",
   "version": "0.1.0",
   "private": true,
-  "description": "Shared configuration, env validation, and app constants for Postlane",
+  "description": "Shared configuration, env validation, and app constants for Scope Social Manager",
   "type": "module",
   "exports": {
     ".": {

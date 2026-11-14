@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@postlane/config", "@postlane/shared"],
+  transpilePackages: ["@scope/config", "@scope/shared"],
   images: {
     remotePatterns: [
       {

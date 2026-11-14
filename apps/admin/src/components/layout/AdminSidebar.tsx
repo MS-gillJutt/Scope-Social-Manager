@@ -91,7 +91,7 @@ export function AdminSidebar() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center space-x-1.5">
-              <span className="font-bold text-white text-base tracking-tight">Postlane</span>
+              <span className="font-bold text-white text-base tracking-tight">Scope Social Manager</span>
               <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-500/30">
                 Admin
               </span>

@@ -1,5 +1,5 @@
 /**
- * Validation utilities and regex helpers for Postlane.
+ * Validation utilities and regex helpers for Scope Social Manager.
  */
 
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

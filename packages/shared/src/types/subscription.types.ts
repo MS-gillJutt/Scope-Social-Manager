@@ -2,7 +2,7 @@
 // Subscription & Billing Types
 // =============================================================================
 
-import type { Plan } from "@postlane/config";
+import type { Plan } from "@scope/config";
 
 export type BillingInterval = "month" | "year";
 export type SubscriptionStatus =

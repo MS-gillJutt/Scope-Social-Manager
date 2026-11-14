@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
 import crypto from 'crypto';
-import { PrismaClient, User } from '@postlane/db';
+import { PrismaClient, User } from '@scope/db';
 import { FastifyInstance } from 'fastify';
 import { TokenService, TokenPair } from './token.service.js';
 import { EmailService } from './email.service.js';
@@ -366,8 +366,8 @@ export class AuthService {
     if (!user) throw new NotFoundError('User');
 
     const secretObj = speakeasy.generateSecret({
-      name: `Postlane (${user.email})`,
-      issuer: 'Postlane',
+      name: `Scope Social Manager (${user.email})`,
+      issuer: 'Scope Social Manager',
     });
 
     const qrCodeUrl = await QRCode.toDataURL(secretObj.otpauth_url ?? '');

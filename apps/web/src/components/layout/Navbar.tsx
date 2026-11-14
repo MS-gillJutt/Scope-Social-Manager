@@ -80,7 +80,7 @@ export function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                Postlane
+                Scope Social Manager
                 <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">
                   Pro
                 </span>

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@postlane/db';
+import { PrismaClient } from '@scope/db';
 
 export interface AuditLogInput {
   userId?: string | null;

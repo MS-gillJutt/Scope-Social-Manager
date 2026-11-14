@@ -2,7 +2,7 @@
 // Analytics Types
 // =============================================================================
 
-import type { Platform } from "@postlane/config";
+import type { Platform } from "@scope/config";
 
 export interface MetricValue {
   value: number;

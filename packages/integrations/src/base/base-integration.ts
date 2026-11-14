@@ -36,7 +36,7 @@ export abstract class BaseSocialPlatformIntegration
       baseURL,
       timeout: 30000,
       headers: {
-        'User-Agent': 'Postlane-SocialManager/1.0',
+        'User-Agent': 'Scope-SocialManager/1.0',
         Accept: 'application/json',
         ...defaultHeaders,
       },

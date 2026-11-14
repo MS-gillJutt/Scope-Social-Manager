@@ -1,5 +1,5 @@
 /**
- * Date and time utility functions for Postlane.
+ * Date and time utility functions for Scope Social Manager.
  */
 
 /**

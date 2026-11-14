@@ -16,16 +16,15 @@ Status legend: ✅ done · 🟡 partial · ⬜ not started
 - ⬜ Media upload routes (wire `packages/media`)
 - ⬜ Social account connect (OAuth) routes
 - ⬜ Analytics routes
-- ⬜ Subscription / billing routes
+- ⬜ Subscription / billing routes (provider-agnostic: Stripe OR Paddle/Lemon Squeezy/Polar)
 - ⬜ Admin routes
 - ⬜ `GET /health` verification + API tests
 
 ## Phase 3 – Integrations
 - ✅ Base integration + interface/types
 - ✅ Facebook, Instagram, Threads, TikTok, LinkedIn, YouTube
+- ✅ `integrations/src/index.ts` + registry added
 - 🟡 Reddit: types only, `reddit.integration.ts` missing
-- ⬜ `integrations/src/index.ts` (package entry point is missing)
-- ⬜ Integration registry / factory
 
 ## Phase 4 – Workers
 - 🟡 `publish.queue.ts`, redis, logger, sanitizer, errors exist
@@ -52,11 +51,13 @@ Status legend: ✅ done · 🟡 partial · ⬜ not started
 - ⬜ Deployment config (Dockerfiles, hosting)
 
 ## Known issues to fix
-1. `packages/api` has no `typecheck` / `lint` scripts and doesn't depend on `@postlane/email` or `@postlane/integrations`.
+1. `packages/api` has no `typecheck` / `lint` scripts and doesn't depend on `@scope/email` or `@scope/integrations`.
 2. `packages/workers` has no `lint` script and its tsconfig lacks `module` overrides for `tsx` ESM use.
 3. API CORS allow-list is hard-coded to port 3000; the dashboard app now runs on 3002.
 4. `.env.example` should be cross-checked against `packages/config/src/env.ts`.
-5. Project is named "Postlane" in code and "Scope Social Manager" by the owner — decide on the final brand and rename `@postlane/*` scope if needed.
+5. Brand name is currently a constant in `packages/config/src/constants.ts`. Make it editable by the owner from the super-admin panel (store in a `PlatformSetting` table, cache in Redis, read via a `getBrand()` helper).
+6. Placeholder domain `scopesocialmanager.com` is used in emails/constants — replace with the real domain.
+7. Stripe likely cannot onboard Pakistan-based merchants — build a second `PaymentProvider` (Paddle / Lemon Squeezy / Polar) behind the existing interface. See COSTS.md.
 
 ## Suggested next steps (in order)
 1. Push repo to GitHub, enable Actions, fix whatever CI reports.

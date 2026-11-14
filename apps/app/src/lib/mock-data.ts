@@ -84,7 +84,7 @@ export interface MockTeamMember {
 export const CURRENT_USER: MockUser = {
   id: "usr_01",
   name: "Alex Rivera",
-  email: "alex@postlane.io",
+  email: "alex@scopesocialmanager.com",
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
   role: "owner",
 };
@@ -143,8 +143,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_ig",
     platform: "instagram",
-    accountName: "Postlane Official",
-    handle: "@postlanehq",
+    accountName: "Scope Social Manager Official",
+    handle: "@scopesocialhq",
     avatar: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=80",
     followersCount: 48200,
     status: "active",
@@ -153,8 +153,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_li",
     platform: "linkedin",
-    accountName: "Postlane Technologies",
-    handle: "postlane-tech",
+    accountName: "Scope Social Manager Technologies",
+    handle: "scope-tech",
     avatar: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=120&auto=format&fit=crop&q=80",
     followersCount: 19450,
     status: "active",
@@ -163,8 +163,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_tt",
     platform: "tiktok",
-    accountName: "Postlane Daily",
-    handle: "@postlanelive",
+    accountName: "Scope Social Manager Daily",
+    handle: "@scopesociallive",
     avatar: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=120&auto=format&fit=crop&q=80",
     followersCount: 112000,
     status: "active",
@@ -173,8 +173,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_fb",
     platform: "facebook",
-    accountName: "Postlane Social Community",
-    handle: "PostlaneHQ",
+    accountName: "Scope Social Community",
+    handle: "ScopeSocialHQ",
     avatar: "https://images.unsplash.com/photo-1563089145-599997674d42?w=120&auto=format&fit=crop&q=80",
     followersCount: 32400,
     status: "expiring_soon",
@@ -184,8 +184,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_yt",
     platform: "youtube",
-    accountName: "Postlane Creator Channel",
-    handle: "@PostlaneMedia",
+    accountName: "Scope Social Manager Creator Channel",
+    handle: "@ScopeSocialMedia",
     avatar: "https://images.unsplash.com/photo-1614680376593-902f749f7ffc?w=120&auto=format&fit=crop&q=80",
     followersCount: 24900,
     status: "active",
@@ -194,8 +194,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_th",
     platform: "threads",
-    accountName: "Postlane HQ",
-    handle: "@postlanehq",
+    accountName: "Scope Social Manager HQ",
+    handle: "@scopesocialhq",
     avatar: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=80",
     followersCount: 14200,
     status: "active",
@@ -204,8 +204,8 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
   {
     id: "acc_rd",
     platform: "reddit",
-    accountName: "u/postlane_team",
-    handle: "u/postlane_team",
+    accountName: "u/scope_team",
+    handle: "u/scope_team",
     avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=120&auto=format&fit=crop&q=80",
     followersCount: 2840,
     status: "disconnected",
@@ -216,7 +216,7 @@ export const CONNECTED_ACCOUNTS: MockAccount[] = [
 export const MOCK_POSTS: MockPost[] = [
   {
     id: "post_01",
-    caption: "🚀 Big news! Introducing Postlane 2.0: Schedule, analyze, and publish across 7 platforms with seamless team workflows and instant AI caption generation. Try it free today! #socialmedia #marketing #growth",
+    caption: "🚀 Big news! Introducing Scope Social Manager 2.0: Schedule, analyze, and publish across 7 platforms with seamless team workflows and instant AI caption generation. Try it free today! #socialmedia #marketing #growth",
     mediaUrls: [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80"
     ],
@@ -293,7 +293,7 @@ export const MOCK_POSTS: MockPost[] = [
     externalLinks: {
       linkedin: "https://linkedin.com/feed/update/urn:li:activity:712984920",
       youtube: "https://youtube.com/watch?v=dQw4w9WgXcQ",
-      tiktok: "https://tiktok.com/@postlane/video/7123984",
+      tiktok: "https://tiktok.com/@scope/video/7123984",
     },
     metrics: {
       views: 34200,
@@ -433,7 +433,7 @@ export const MOCK_TEAM_MEMBERS: MockTeamMember[] = [
   {
     id: "tm_01",
     name: "Alex Rivera",
-    email: "alex@postlane.io",
+    email: "alex@scopesocialmanager.com",
     role: "owner",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     status: "active",
@@ -442,7 +442,7 @@ export const MOCK_TEAM_MEMBERS: MockTeamMember[] = [
   {
     id: "tm_02",
     name: "Sophia Chen",
-    email: "sophia@postlane.io",
+    email: "sophia@scopesocialmanager.com",
     role: "admin",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
     status: "active",
@@ -451,7 +451,7 @@ export const MOCK_TEAM_MEMBERS: MockTeamMember[] = [
   {
     id: "tm_03",
     name: "Marcus Vance",
-    email: "marcus@postlane.io",
+    email: "marcus@scopesocialmanager.com",
     role: "manager",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
     status: "active",
@@ -460,7 +460,7 @@ export const MOCK_TEAM_MEMBERS: MockTeamMember[] = [
   {
     id: "tm_04",
     name: "Elena Rostova",
-    email: "elena@postlane.io",
+    email: "elena@scopesocialmanager.com",
     role: "editor",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
     status: "active",
@@ -489,7 +489,7 @@ export const MOCK_NOTIFICATIONS = [
   {
     id: "notif_02",
     title: "Account Token Expiring Soon",
-    message: "Facebook token for 'Postlane Social Community' expires in 3 days. Please reconnect to prevent publishing errors.",
+    message: "Facebook token for 'Scope Social Community' expires in 3 days. Please reconnect to prevent publishing errors.",
     time: "5 hours ago",
     read: false,
     type: "warning" as const,

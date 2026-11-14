@@ -1,4 +1,4 @@
-import { PLATFORMS, PLATFORM_META, type Platform } from "@postlane/config";
+import { PLATFORMS, PLATFORM_META, type Platform } from "@scope/config";
 
 /**
  * Validates whether a string is a supported social platform.

@@ -1,5 +1,5 @@
 {
-  "name": "@postlane/app",
+  "name": "@scope/app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@postlane/config": "workspace:*",
-    "@postlane/shared": "workspace:*",
+    "@scope/config": "workspace:*",
+    "@scope/shared": "workspace:*",
     "@tanstack/react-query": "^5.20.5",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",

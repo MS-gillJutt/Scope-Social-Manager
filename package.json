@@ -1,8 +1,8 @@
 {
-  "name": "postlane",
+  "name": "scope",
   "version": "0.1.0",
   "private": true,
-  "description": "Postlane — Multi-tenant Social Media Management SaaS",
+  "description": "Scope Social Manager — Multi-tenant Social Media Management SaaS",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

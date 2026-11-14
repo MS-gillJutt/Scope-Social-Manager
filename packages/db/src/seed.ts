@@ -45,9 +45,9 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   // 1. Super-admin user
   // ------------------------------------------------------------------
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@postlane.app";
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@scopesocialmanager.com";
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "changeme-dev-only";
-  const adminName = process.env.SEED_ADMIN_NAME ?? "Postlane Admin";
+  const adminName = process.env.SEED_ADMIN_NAME ?? "Scope Social Manager Admin";
 
   const admin = await prisma.user.upsert({
     where: { email: adminEmail },
@@ -66,7 +66,7 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   // 2. Demo workspace for the admin
   // ------------------------------------------------------------------
-  const workspaceName = "Postlane HQ";
+  const workspaceName = "Scope Social Manager HQ";
   const workspaceSlug = slugify(workspaceName);
 
   const workspace = await prisma.workspace.upsert({
@@ -108,7 +108,7 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   // 4. Demo second workspace member (viewer)
   // ------------------------------------------------------------------
-  const viewerEmail = process.env.SEED_VIEWER_EMAIL ?? "viewer@postlane.app";
+  const viewerEmail = process.env.SEED_VIEWER_EMAIL ?? "viewer@scopesocialmanager.com";
 
   const viewer = await prisma.user.upsert({
     where: { email: viewerEmail },

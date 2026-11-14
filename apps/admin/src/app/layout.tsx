@@ -4,8 +4,8 @@ import { AdminSidebar } from "@/components/layout/AdminSidebar";
 import { AdminHeader } from "@/components/layout/AdminHeader";
 
 export const metadata: Metadata = {
-  title: "Postlane Super Admin | Platform Control Center",
-  description: "Internal operations, tenancy management, queue health, and revenue analytics for Postlane SaaS.",
+  title: "Scope Social Manager Super Admin | Platform Control Center",
+  description: "Internal operations, tenancy management, queue health, and revenue analytics for Scope Social Manager SaaS.",
 };
 
 export default function RootLayout({

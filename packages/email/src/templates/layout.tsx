@@ -11,7 +11,7 @@ import {
   Text,
   Hr,
 } from "@react-email/components";
-import { BRAND } from "@postlane/config";
+import { BRAND } from "@scope/config";
 
 interface EmailLayoutProps {
   previewText: string;

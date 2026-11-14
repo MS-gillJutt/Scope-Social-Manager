@@ -1,4 +1,4 @@
-import { IntegrationError } from '@postlane/integrations';
+import { IntegrationError } from '@scope/integrations';
 
 export type ErrorClassification = 'TEMPORARY' | 'PERMANENT';
 

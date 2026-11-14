@@ -6,31 +6,31 @@ services:
   # ===========================================================================
   postgres:
     image: postgres:16-alpine
-    container_name: postlane-postgres
+    container_name: scope-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postlane}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postlane}
-      POSTGRES_DB: ${POSTGRES_DB:-postlane_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-scope}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-scope}
+      POSTGRES_DB: ${POSTGRES_DB:-scope_dev}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postlane} -d ${POSTGRES_DB:-postlane_dev}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-scope} -d ${POSTGRES_DB:-scope_dev}"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - postlane-network
+      - scope-network
 
   # ===========================================================================
   # Redis 7 — Caching, Pub/Sub, and BullMQ Queues
   # ===========================================================================
   redis:
     image: redis:7-alpine
-    container_name: postlane-redis
+    container_name: scope-redis
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     ports:
@@ -43,15 +43,15 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - postlane-network
+      - scope-network
 
 volumes:
   postgres_data:
-    name: postlane_postgres_data
+    name: scope_postgres_data
   redis_data:
-    name: postlane_redis_data
+    name: scope_redis_data
 
 networks:
-  postlane-network:
-    name: postlane-network
+  scope-network:
+    name: scope-network
     driver: bridge

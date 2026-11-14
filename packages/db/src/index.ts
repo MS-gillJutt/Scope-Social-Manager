@@ -1,5 +1,5 @@
 // ============================================================
-// @postlane/db — Public API
+// @scope/db — Public API
 // ============================================================
 // Re-export everything consumers need so they never import
 // directly from @prisma/client or internal paths.

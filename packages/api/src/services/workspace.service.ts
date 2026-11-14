@@ -5,7 +5,7 @@ import {
   MemberRole,
   WorkspacePlan,
   SubscriptionStatus,
-} from '@postlane/db';
+} from '@scope/db';
 import crypto from 'crypto';
 import { generateUniqueSlug } from '../utils/slug.js';
 import { EmailService } from './email.service.js';
@@ -16,7 +16,7 @@ import {
   ConflictError,
   ValidationError,
 } from '../utils/errors.js';
-import { PLAN_LIMITS } from '@postlane/config';
+import { PLAN_LIMITS } from '@scope/config';
 
 export interface CreateWorkspaceInput {
   name: string;

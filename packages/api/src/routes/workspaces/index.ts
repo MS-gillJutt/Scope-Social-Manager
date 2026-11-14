@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
-import { MemberRole } from '@postlane/db';
+import { MemberRole } from '@scope/db';
 import { WorkspaceService } from '../../services/workspace.service.js';
 import {
   authenticate,

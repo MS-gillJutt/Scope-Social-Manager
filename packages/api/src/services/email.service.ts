@@ -14,7 +14,7 @@ export class EmailService {
 
   constructor() {
     this.appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-    this.fromEmail = process.env.EMAIL_FROM || 'Postlane <notifications@postlane.io>';
+    this.fromEmail = process.env.EMAIL_FROM || 'Scope Social Manager <notifications@scopesocialmanager.com>';
 
     const host = process.env.SMTP_HOST || 'localhost';
     const port = parseInt(process.env.SMTP_PORT || '587', 10);
@@ -55,7 +55,7 @@ export class EmailService {
     const verifyUrl = `${this.appUrl}/auth/verify-email?token=${encodeURIComponent(token)}`;
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #6366f1;">Welcome to Postlane, ${name}!</h2>
+        <h2 style="color: #6366f1;">Welcome to Scope Social Manager, ${name}!</h2>
         <p>Please verify your email address to get started managing your social media.</p>
         <div style="margin: 30px 0;">
           <a href="${verifyUrl}" style="background-color: #6366f1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
@@ -63,13 +63,13 @@ export class EmailService {
           </a>
         </div>
         <p style="color: #6b7280; font-size: 14px;">This link will expire in 24 hours.</p>
-        <p style="color: #9ca3af; font-size: 12px;">If you did not sign up for Postlane, you can safely ignore this email.</p>
+        <p style="color: #9ca3af; font-size: 12px;">If you did not sign up for Scope Social Manager, you can safely ignore this email.</p>
       </div>
     `;
 
     await this.sendMail({
       to: email,
-      subject: 'Verify your Postlane email address',
+      subject: 'Verify your Scope Social Manager email address',
       html,
       text: `Hello ${name}, please verify your email address by visiting: ${verifyUrl}`,
     });
@@ -79,7 +79,7 @@ export class EmailService {
     const resetUrl = `${this.appUrl}/auth/reset-password?token=${encodeURIComponent(token)}`;
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #6366f1;">Reset your Postlane password</h2>
+        <h2 style="color: #6366f1;">Reset your Scope Social Manager password</h2>
         <p>Hi ${name},</p>
         <p>We received a request to reset your password. Click the button below to choose a new password:</p>
         <div style="margin: 30px 0;">
@@ -93,7 +93,7 @@ export class EmailService {
 
     await this.sendMail({
       to: email,
-      subject: 'Reset your Postlane password',
+      subject: 'Reset your Scope Social Manager password',
       html,
       text: `Hi ${name}, reset your password here: ${resetUrl}`,
     });
@@ -109,7 +109,7 @@ export class EmailService {
     const inviteUrl = `${this.appUrl}/invite/${encodeURIComponent(token)}`;
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #6366f1;">You're invited to join ${workspaceName} on Postlane</h2>
+        <h2 style="color: #6366f1;">You're invited to join ${workspaceName} on Scope Social Manager</h2>
         <p>${inviterName} has invited you to join their team as a <strong>${role}</strong>.</p>
         <div style="margin: 30px 0;">
           <a href="${inviteUrl}" style="background-color: #6366f1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
@@ -122,7 +122,7 @@ export class EmailService {
 
     await this.sendMail({
       to: email,
-      subject: `${inviterName} invited you to join ${workspaceName} on Postlane`,
+      subject: `${inviterName} invited you to join ${workspaceName} on Scope Social Manager`,
       html,
       text: `${inviterName} invited you to join ${workspaceName} as ${role}. Accept invitation: ${inviteUrl}`,
     });

@@ -1,4 +1,4 @@
-import { PAGINATION } from "@postlane/config";
+import { PAGINATION } from "@scope/config";
 import type { PaginatedResult } from "../types/api.types.js";
 
 export interface PaginationParams {

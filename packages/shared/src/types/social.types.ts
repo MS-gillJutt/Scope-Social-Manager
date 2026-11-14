@@ -2,7 +2,7 @@
 // Social Account / Platform Connection Types
 // =============================================================================
 
-import type { Platform } from "@postlane/config";
+import type { Platform } from "@scope/config";
 
 export type TokenType = "oauth2" | "api_key";
 

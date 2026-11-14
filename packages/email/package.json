@@ -1,8 +1,8 @@
 {
-  "name": "@postlane/email",
+  "name": "@scope/email",
   "version": "0.1.0",
   "private": true,
-  "description": "Transactional email templates and send utility for Postlane",
+  "description": "Transactional email templates and send utility for Scope Social Manager",
   "type": "module",
   "exports": {
     ".": {
@@ -26,7 +26,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@postlane/config": "workspace:*",
+    "@scope/config": "workspace:*",
     "@react-email/components": "^0.0.15",
     "@react-email/render": "^0.0.12",
     "nodemailer": "^6.9.9",

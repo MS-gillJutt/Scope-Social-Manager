@@ -1,6 +1,6 @@
 import { Queue, type JobsOptions } from 'bullmq';
 import type { Redis } from 'ioredis';
-import type { Platform } from '@postlane/db';
+import type { Platform } from '@scope/db';
 import { redisConnection } from '../redis.js';
 
 export const PUBLISH_QUEUE_NAME = 'publish-queue';
