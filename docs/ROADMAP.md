@@ -24,12 +24,13 @@ Status legend: ✅ done · 🟡 partial · ⬜ not started
 - ✅ Base integration + interface/types
 - ✅ Facebook, Instagram, Threads, TikTok, LinkedIn, YouTube
 - ✅ `integrations/src/index.ts` + registry added
-- 🟡 Reddit: types only, `reddit.integration.ts` missing
+- ✅ Reddit (text + link posts; image/video upload not supported yet)
 
 ## Phase 4 – Workers
-- 🟡 `publish.queue.ts`, redis, logger, sanitizer, errors exist
-- ⬜ `workers/src/index.ts` (entry point missing)
-- ⬜ Publish worker processor, retry/backoff, token-refresh job, analytics sync job
+- ✅ Queue, redis, logger, sanitizer, error classification
+- ✅ `workers/src/index.ts` entry point + graceful shutdown
+- ✅ Publish processor (idempotent, auto token refresh, retry/permanent-fail handling)
+- ⬜ Analytics sync job, token-expiring reminder job
 - ⬜ Email notification jobs (post published/failed, token expiring)
 
 ## Phase 5 – Emails
@@ -61,7 +62,12 @@ Status legend: ✅ done · 🟡 partial · ⬜ not started
 
 ## Suggested next steps (in order)
 1. Push repo to GitHub, enable Actions, fix whatever CI reports.
-2. Add missing entry points (`integrations/src/index.ts`, `workers/src/index.ts`) and `reddit.integration.ts`.
+2. ~~Add missing entry points and Reddit~~ (done, **untested** — needs `pnpm install && pnpm typecheck`).
 3. Get `pnpm install && pnpm typecheck && pnpm build` fully green.
 4. Finish `apps/web` home page, then `apps/app` shell + auth pages.
 5. Build posts/media/social-account API routes, then worker processor.
+
+## Needs verification after first `pnpm install`
+- `@scope/workers` is CommonJS (no `"type": "module"`) but imports `@scope/integrations`, which is ESM — may need `"type": "module"` in workers/api/db/shared/config or a bundler (tsup) for libraries.
+- `packages/db/src/index.ts` imports `./client` without extension (fails under NodeNext ESM).
+- Workers import `@scope/db`'s `Prisma` as a type only — fine, but check `prisma generate` ran first.

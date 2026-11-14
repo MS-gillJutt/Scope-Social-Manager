@@ -10,11 +10,11 @@ import { ThreadsIntegration } from './threads/threads.integration.js';
 import { TikTokIntegration } from './tiktok/tiktok.integration.js';
 import { LinkedInIntegration } from './linkedin/linkedin.integration.js';
 import { YouTubeIntegration } from './youtube/youtube.integration.js';
+import { RedditIntegration } from './reddit/reddit.integration.js';
 
 /**
  * Factories (not instances) so credentials are read from env lazily and
  * each caller gets a fresh client.
- * TODO: register REDDIT once reddit.integration.ts is implemented.
  */
 const factories: Partial<Record<Platform, () => BaseSocialPlatformIntegration>> = {
   FACEBOOK: () => new FacebookIntegration(),
@@ -23,6 +23,7 @@ const factories: Partial<Record<Platform, () => BaseSocialPlatformIntegration>> 
   TIKTOK: () => new TikTokIntegration(),
   LINKEDIN: () => new LinkedInIntegration(),
   YOUTUBE: () => new YouTubeIntegration(),
+  REDDIT: () => new RedditIntegration(),
 };
 
 export function isPlatformSupported(platform: Platform): boolean {

@@ -30,11 +30,12 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "@types/speakeasy": "^2.0.7",
-    "@types/qrcode": "^1.5.5",
-    "@types/nodemailer": "^6.4.14",
-    "@types/uuid": "^9.0.7",
     "@types/node": "^20.11.5",
+    "@types/nodemailer": "^6.4.14",
+    "@types/qrcode": "^1.5.5",
+    "@types/speakeasy": "^2.0.7",
+    "@types/uuid": "^9.0.7",
+    "pino-pretty": "^10.3.1",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }

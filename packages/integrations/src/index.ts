@@ -8,5 +8,6 @@ export { ThreadsIntegration } from './threads/threads.integration.js';
 export { TikTokIntegration } from './tiktok/tiktok.integration.js';
 export { LinkedInIntegration } from './linkedin/linkedin.integration.js';
 export { YouTubeIntegration } from './youtube/youtube.integration.js';
+export { RedditIntegration } from './reddit/reddit.integration.js';
 
 export { getIntegration, getSupportedPlatforms, isPlatformSupported } from './registry.js';
