@@ -29,7 +29,7 @@ export async function validateWorkspace(
 
   const member = await request.server.prisma.workspaceMember.findUnique({
     where: {
-      userId_workspaceId: {
+      workspaceId_userId: {
         userId: request.user.id,
         workspaceId,
       },

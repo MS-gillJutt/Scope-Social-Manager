@@ -8,6 +8,9 @@
 // Prisma client singleton
 export { prisma, default as db } from "./client";
 
+// PrismaClient class (value + type) — services type their injected client with it
+export { PrismaClient } from "@prisma/client";
+
 // All generated Prisma types (models, enums, input types, etc.)
 export type {
   User,

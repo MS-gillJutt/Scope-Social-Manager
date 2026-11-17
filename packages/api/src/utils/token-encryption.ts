@@ -42,6 +42,9 @@ export function decrypt(ciphertext: string): string {
   const parts = ciphertext.split(':');
   if (parts.length !== 3) throw new Error('Invalid ciphertext format');
   const [ivHex, authTagHex, encryptedHex] = parts;
+  // noUncheckedIndexedAccess: the length check above guarantees all three
+  // parts exist at runtime; this guard narrows them from string | undefined.
+  if (!ivHex || !authTagHex || !encryptedHex) throw new Error('Invalid ciphertext format');
   const iv = Buffer.from(ivHex, 'hex');
   const authTag = Buffer.from(authTagHex, 'hex');
   const encryptedData = Buffer.from(encryptedHex, 'hex');

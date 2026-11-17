@@ -11,6 +11,7 @@ import { TikTokIntegration } from './tiktok/tiktok.integration.js';
 import { LinkedInIntegration } from './linkedin/linkedin.integration.js';
 import { YouTubeIntegration } from './youtube/youtube.integration.js';
 import { RedditIntegration } from './reddit/reddit.integration.js';
+import { WhatsappStatusIntegration } from './whatsapp/whatsapp.integration.js';
 
 /**
  * Factories (not instances) so credentials are read from env lazily and
@@ -24,6 +25,7 @@ const factories: Partial<Record<Platform, () => BaseSocialPlatformIntegration>> 
   LINKEDIN: () => new LinkedInIntegration(),
   YOUTUBE: () => new YouTubeIntegration(),
   REDDIT: () => new RedditIntegration(),
+  WHATSAPP: () => new WhatsappStatusIntegration(),
 };
 
 export function isPlatformSupported(platform: Platform): boolean {

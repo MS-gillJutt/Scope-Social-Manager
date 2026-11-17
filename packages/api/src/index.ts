@@ -14,6 +14,9 @@ import multipartPlugin from './plugins/multipart.plugin.js';
 import { authRoutes } from './routes/auth/index.js';
 import { accountRoutes } from './routes/account/index.js';
 import { workspaceRoutes } from './routes/workspaces/index.js';
+import { contentRoutes } from './routes/content/index.js';
+import { aiRoutes } from './routes/ai/index.js';
+import { accountConnectionRoutes } from './routes/accounts/index.js';
 
 // Utils
 import { AppError } from './utils/errors.js';
@@ -48,7 +51,14 @@ export async function buildApp() {
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
   await app.register(cors, {
-    origin: [appUrl, 'http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: [
+      appUrl,
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      // Scope Social Manager composer (Vite dev server) — apps/composer.
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -143,6 +153,9 @@ export async function buildApp() {
   await app.register(authRoutes, { prefix: '/auth' });
   await app.register(accountRoutes, { prefix: '/account' });
   await app.register(workspaceRoutes, { prefix: '/workspaces' });
+  await app.register(contentRoutes, { prefix: '/workspaces/:workspaceId/content' });
+  await app.register(aiRoutes, { prefix: '/ai' });
+  await app.register(accountConnectionRoutes);
 
   return app;
 }

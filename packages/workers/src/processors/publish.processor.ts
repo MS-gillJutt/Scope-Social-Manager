@@ -67,7 +67,13 @@ export async function processPublishJob(job: Job<PublishJobData>): Promise<void>
 
   try {
     const integration = getIntegration(post.platform as IntegrationPlatform);
-    const tokens = await getValidTokens(post.connectedAccount);
+    // WhatsApp Status has no connected account and no API: the integration
+    // returns a manual-action result instead of publishing. No tokens exist
+    // to fetch, so skip the token step for it.
+    const tokens =
+      post.platform === 'WHATSAPP' || !post.connectedAccount
+        ? { accessToken: '' }
+        : await getValidTokens(post.connectedAccount);
 
     const publicBase = (process.env.R2_PUBLIC_URL ?? '').replace(/\/$/, '');
     const payload: PlatformPostPayload = {
@@ -92,6 +98,46 @@ export async function processPublishJob(job: Job<PublishJobData>): Promise<void>
     }
 
     const result = await integration.publishPost(tokens, payload);
+
+    // Manual-action destination (WhatsApp Status — no publish API): the post
+    // is NOT published and NOT an error. It waits for the user to post it
+    // from the platform's own app; the composer shows the prepared media +
+    // caption and a "Mark as posted" button. The job completes successfully
+    // in NEEDS_MANUAL_ACTION so BullMQ does not retry it.
+    if (result.requiresManualAction) {
+      const mediaUrls = payload.media?.map((m) => m.url) ?? [];
+      await prisma.$transaction([
+        prisma.platformPost.update({
+          where: { id: platformPostId },
+          data: {
+            status: PostStatus.NEEDS_MANUAL_ACTION,
+            errorCode: null,
+            errorMessage: null,
+          },
+        }),
+        prisma.publishJob.update({
+          where: { id: publishJobId },
+          data: {
+            status: PostStatus.NEEDS_MANUAL_ACTION,
+            completedAt: new Date(),
+            errorDetails: undefined,
+            apiResponse: toJson(
+              sanitizeApiResponse({
+                requiresManualAction: true,
+                manualActionNote: result.manualActionNote ?? '',
+                mediaUrls,
+              })
+            ),
+          },
+        }),
+      ]);
+
+      log.info(
+        { platform: post.platform, platformPostId },
+        'Post needs manual action in the platform app'
+      );
+      return;
+    }
 
     await prisma.$transaction([
       prisma.platformPost.update({
@@ -125,7 +171,7 @@ export async function processPublishJob(job: Job<PublishJobData>): Promise<void>
 
     log.error({ code, attempt, isFinal, message: classified.message }, 'Publish attempt failed');
 
-    if (code === 'TOKEN_EXPIRED' || code === 'TOKEN_INVALID') {
+    if ((code === 'TOKEN_EXPIRED' || code === 'TOKEN_INVALID') && post.connectedAccountId) {
       await markAccountExpired(post.connectedAccountId);
     }
 

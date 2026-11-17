@@ -15,8 +15,14 @@ import {
   NotFoundError,
   ConflictError,
   ValidationError,
+  AuthError,
 } from '../utils/errors.js';
 import { PLAN_LIMITS } from '@scope/config';
+
+// Roles allowed to manage a workspace (owner/admin). Typed as MemberRole[]
+// so `.includes(member.role)` accepts the full MemberRole union (which also
+// has MANAGER / EDITOR / VIEWER) instead of narrowing to "OWNER" | "ADMIN".
+const ADMIN_ROLES: MemberRole[] = [MemberRole.OWNER, MemberRole.ADMIN];
 
 export interface CreateWorkspaceInput {
   name: string;
@@ -26,9 +32,11 @@ export interface CreateWorkspaceInput {
 
 export interface UpdateWorkspaceInput {
   name?: string;
-  logoUrl?: string;
+  // null clears the field (the service passes it straight to Prisma);
+  // the route's zod schema already allows nullable for both.
+  logoUrl?: string | null;
   timezone?: string;
-  website?: string;
+  website?: string | null;
 }
 
 export interface InviteMemberInput {
@@ -142,7 +150,7 @@ export class WorkspaceService {
   ): Promise<Workspace & { role: MemberRole; membersCount: number }> {
     const member = await this.prisma.workspaceMember.findUnique({
       where: {
-        userId_workspaceId: { userId, workspaceId },
+        workspaceId_userId: { userId, workspaceId },
       },
       include: {
         workspace: {
@@ -173,10 +181,10 @@ export class WorkspaceService {
     input: UpdateWorkspaceInput
   ): Promise<Workspace> {
     const member = await this.prisma.workspaceMember.findUnique({
-      where: { userId_workspaceId: { userId, workspaceId } },
+      where: { workspaceId_userId: { userId, workspaceId } },
     });
 
-    if (!member || ![MemberRole.OWNER, MemberRole.ADMIN].includes(member.role)) {
+    if (!member || !ADMIN_ROLES.includes(member.role)) {
       throw new ForbiddenError('Only workspace owners or admins can update details');
     }
 
@@ -211,7 +219,7 @@ export class WorkspaceService {
     confirmName: string
   ): Promise<void> {
     const member = await this.prisma.workspaceMember.findUnique({
-      where: { userId_workspaceId: { userId, workspaceId } },
+      where: { workspaceId_userId: { userId, workspaceId } },
       include: { workspace: true },
     });
 
@@ -272,14 +280,14 @@ export class WorkspaceService {
     input: InviteMemberInput
   ): Promise<{ message: string; invitationId: string }> {
     const inviter = await this.prisma.workspaceMember.findUnique({
-      where: { userId_workspaceId: { userId: inviterId, workspaceId } },
+      where: { workspaceId_userId: { userId: inviterId, workspaceId } },
       include: {
         workspace: true,
         user: { select: { name: true } },
       },
     });
 
-    if (!inviter || ![MemberRole.OWNER, MemberRole.ADMIN].includes(inviter.role)) {
+    if (!inviter || !ADMIN_ROLES.includes(inviter.role)) {
       throw new ForbiddenError('Only workspace owners or admins can invite members');
     }
 
@@ -365,10 +373,10 @@ export class WorkspaceService {
     newRole: MemberRole
   ): Promise<WorkspaceMember> {
     const actingMember = await this.prisma.workspaceMember.findUnique({
-      where: { userId_workspaceId: { userId: actingUserId, workspaceId } },
+      where: { workspaceId_userId: { userId: actingUserId, workspaceId } },
     });
 
-    if (!actingMember || ![MemberRole.OWNER, MemberRole.ADMIN].includes(actingMember.role)) {
+    if (!actingMember || !ADMIN_ROLES.includes(actingMember.role)) {
       throw new ForbiddenError('Only workspace owners or admins can change member roles');
     }
 
@@ -417,7 +425,7 @@ export class WorkspaceService {
     memberId: string
   ): Promise<void> {
     const actingMember = await this.prisma.workspaceMember.findUnique({
-      where: { userId_workspaceId: { userId: actingUserId, workspaceId } },
+      where: { workspaceId_userId: { userId: actingUserId, workspaceId } },
     });
 
     const targetMember = await this.prisma.workspaceMember.findUnique({
@@ -432,7 +440,7 @@ export class WorkspaceService {
     const isSelf = targetMember.userId === actingUserId;
 
     if (!isSelf) {
-      if (!actingMember || ![MemberRole.OWNER, MemberRole.ADMIN].includes(actingMember.role)) {
+      if (!actingMember || !ADMIN_ROLES.includes(actingMember.role)) {
         throw new ForbiddenError('Only owners or admins can remove members');
       }
       if (targetMember.role === MemberRole.OWNER) {
@@ -553,13 +561,13 @@ export class WorkspaceService {
       },
     });
 
-    // Sum media storage bytes
+    // Sum media storage bytes (MediaAsset.size is BigInt bytes)
     const mediaAgg = await this.prisma.mediaAsset.aggregate({
       where: { workspaceId, deletedAt: null },
-      _sum: { fileSize: true },
+      _sum: { size: true },
     });
 
-    const usedStorageBytes = Number(mediaAgg._sum.fileSize || 0);
+    const usedStorageBytes = Number(mediaAgg._sum?.size ?? 0);
     const limitStorageBytes = limits.mediaStorageGB * 1024 * 1024 * 1024;
 
     return {

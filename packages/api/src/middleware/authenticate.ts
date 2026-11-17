@@ -34,7 +34,7 @@ export async function authenticateWithWorkspace(
 
   const member = await request.server.prisma.workspaceMember.findUnique({
     where: {
-      userId_workspaceId: {
+      workspaceId_userId: {
         userId: request.user.id,
         workspaceId,
       },

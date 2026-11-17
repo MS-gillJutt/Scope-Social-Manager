@@ -40,6 +40,11 @@ enum Platform {
   REDDIT
   PINTEREST
   X
+  // WhatsApp Status has NO official API (Meta documents no endpoint for
+  // posting Status). It is a manual-action destination: the composer prepares
+  // media + caption and the user posts it from the WhatsApp app on their
+  // phone. See packages/integrations/src/whatsapp/whatsapp.integration.ts.
+  WHATSAPP
 }
 
 enum AccountStatus {
@@ -307,8 +312,9 @@ model PlatformPost {
   contentItem        ContentItem      @relation(fields: [contentItemId], references: [id], onDelete: Cascade)
   workspaceId        String
   platform           Platform
-  connectedAccountId String
-  connectedAccount   ConnectedAccount @relation(fields: [connectedAccountId], references: [id])
+  // Nullable: WhatsApp Status has no connected account (manual destination).
+  connectedAccountId String?
+  connectedAccount   ConnectedAccount? @relation(fields: [connectedAccountId], references: [id])
 
   caption         String?
   hashtags        String[]

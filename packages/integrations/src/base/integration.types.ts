@@ -10,7 +10,8 @@ export type Platform =
   | 'THREADS'
   | 'LINKEDIN'
   | 'YOUTUBE'
-  | 'REDDIT';
+  | 'REDDIT'
+  | 'WHATSAPP';
 
 /** OAuth tokens returned by platform */
 export interface OAuthTokens {
@@ -98,6 +99,16 @@ export interface PublishResult {
   platformPostUrl?: string;
   /** Raw platform API response (sanitized — no tokens) */
   rawResponse?: Record<string, unknown>;
+  /**
+   * True when the platform has NO publish API and the post needs a human to
+   * finish it in the platform's own app (WhatsApp Status). The worker marks
+   * the PlatformPost NEEDS_MANUAL_ACTION instead of PUBLISHED, and the
+   * composer shows the manual-action card. Never set alongside a real
+   * platformPostUrl.
+   */
+  requiresManualAction?: boolean;
+  /** What the user must do in the platform's app (shown in the composer) */
+  manualActionNote?: string;
 }
 
 /** Post-level engagement metrics */
@@ -110,6 +121,7 @@ export interface PostMetrics {
   shares?: number;
   clicks?: number;
   saves?: number;
+  engagements?: number;
   /** Video-specific */
   videoViews?: number;
   watchTimeSeconds?: number;
@@ -122,6 +134,7 @@ export interface AccountMetrics {
   followers?: number;
   following?: number;
   posts?: number;
+  views?: number;
   raw?: Record<string, unknown>;
 }
 
@@ -167,6 +180,7 @@ export type IntegrationErrorCode =
   | 'PLATFORM_ERROR'
   | 'CONTENT_REJECTED'
   | 'NETWORK_ERROR'
+  | 'NOT_SUPPORTED'
   | 'UNKNOWN';
 
 export class IntegrationError extends Error {
