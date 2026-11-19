@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { authenticate } from '../../middleware/authenticate.js';
 import { AuthService } from '../../services/auth.service.js';
 import { TokenService } from '../../services/token.service.js';

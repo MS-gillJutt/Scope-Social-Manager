@@ -9,19 +9,23 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./storage": {
       "types": "./dist/storage/r2.service.d.ts",
-      "import": "./dist/storage/r2.service.js"
+      "import": "./dist/storage/r2.service.js",
+      "default": "./dist/storage/r2.service.js"
     },
     "./processors": {
       "types": "./dist/processors/image.processor.d.ts",
-      "import": "./dist/processors/image.processor.js"
+      "import": "./dist/processors/image.processor.js",
+      "default": "./dist/processors/image.processor.js"
     },
     "./validation": {
       "types": "./dist/validation/media.validation.d.ts",
-      "import": "./dist/validation/media.validation.js"
+      "import": "./dist/validation/media.validation.js",
+      "default": "./dist/validation/media.validation.js"
     }
   },
   "files": [

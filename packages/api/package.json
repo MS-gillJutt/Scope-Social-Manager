@@ -21,7 +21,7 @@
     "@scope/media": "workspace:*",
     "@scope/shared": "workspace:*",
     "@scope/config": "workspace:*",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "speakeasy": "^2.0.0",
     "qrcode": "^1.5.3",
     "nodemailer": "^6.9.9",
@@ -33,7 +33,7 @@
     "stripe": "^14.14.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.3",
     "@types/node": "^20.11.5",
     "@types/nodemailer": "^6.4.14",
     "@types/qrcode": "^1.5.5",

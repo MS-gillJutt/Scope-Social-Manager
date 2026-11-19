@@ -7,15 +7,18 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./templates/*": {
       "types": "./dist/templates/*.d.ts",
-      "import": "./dist/templates/*.js"
+      "import": "./dist/templates/*.js",
+      "default": "./dist/templates/*.js"
     },
     "./send": {
       "types": "./dist/send.d.ts",
-      "import": "./dist/send.js"
+      "import": "./dist/send.js",
+      "default": "./dist/send.js"
     }
   },
   "files": ["dist"],
