@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Check, Copy, Download, MessageCircle, Loader2 } from "lucide-react";
-import { Language } from "../constants/translations";
 import { completeManualPost, ApiError } from "../lib/api";
 
 /**
@@ -18,7 +17,6 @@ interface ManualActionCardProps {
   note: string;
   mediaUrls: string[];
   caption: string;
-  lang: Language;
   onMarkedPosted: () => void;
 }
 
@@ -29,7 +27,6 @@ export const ManualActionCard: React.FC<ManualActionCardProps> = ({
   note,
   mediaUrls,
   caption,
-  lang,
   onMarkedPosted,
 }) => {
   const [copied, setCopied] = useState(false);
@@ -71,7 +68,7 @@ export const ManualActionCard: React.FC<ManualActionCardProps> = ({
       <div className="flex items-center gap-2 font-semibold text-emerald-900 dark:text-emerald-200">
         <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
         <span>
-          {lang === "ur" ? "واٹس ایپ اسٹیٹس — آپ کے فون سے" : "WhatsApp Status — from your phone"}
+          WhatsApp Status — from your phone
         </span>
       </div>
       <p className="text-[11px] text-emerald-800 dark:text-emerald-300 mt-1.5 leading-relaxed">{note}</p>
@@ -88,7 +85,7 @@ export const ManualActionCard: React.FC<ManualActionCardProps> = ({
           >
             <Download className="w-3.5 h-3.5" />
             <span>
-              {lang === "ur" ? "میڈیا ڈاؤن لوڈ کریں" : `Download media${mediaUrls.length > 1 ? ` ${i + 1}` : ""}`}
+              `Download media${mediaUrls.length > 1 ? ` ${i + 1}` : ""}`
             </span>
           </a>
         ))}
@@ -98,7 +95,7 @@ export const ManualActionCard: React.FC<ManualActionCardProps> = ({
           className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-lg border border-neutral-200 dark:border-neutral-700 transition-colors"
         >
           {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-          <span>{copied ? "Copied" : lang === "ur" ? "کیپشن کاپی کریں" : "Copy caption"}</span>
+          <span>{copied ? "Copied" : "Copy caption"}</span>
         </button>
       </div>
 
@@ -118,10 +115,10 @@ export const ManualActionCard: React.FC<ManualActionCardProps> = ({
         ) : marked ? (
           <>
             <Check className="w-3.5 h-3.5" />
-            <span>{lang === "ur" ? "پوسٹ ہو گیا!" : "Marked as posted!"}</span>
+            <span>Marked as posted!</span>
           </>
         ) : (
-          <span>{lang === "ur" ? "میں نے اسٹیٹس لگا دیا — مکمل کریں" : "I posted the Status — mark it done"}</span>
+          <span>I posted the Status — mark it done</span>
         )}
       </button>
     </div>

@@ -11,7 +11,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { MediaAttachment, PlatformId, PlatformResult, SocialPost, UserSettings } from "./types";
-import { Language, TRANSLATIONS } from "./constants/translations";
+import { TRANSLATIONS } from "./constants/translations";
 import { PLATFORMS } from "./constants/platforms";
 import { Navbar } from "./components/Navbar";
 import { PlatformSelector } from "./components/PlatformSelector";
@@ -61,7 +61,6 @@ import {
 
 const INITIAL_SETTINGS: UserSettings = {
   webhookUrl: "",
-  defaultLanguage: "ur",
   authorName: "Muhammad Shahid",
   socialHandles: {
     linkedin: "",
@@ -140,11 +139,6 @@ function mapApiPost(item: ApiContentItem): SocialPost | null {
 
 export default function App() {
   // Persistence (UI prefs only — posts live in the API now)
-  const [lang, setLang] = useState<Language>(() => {
-    const saved = localStorage.getItem("omnipost_lang");
-    return (saved as Language) || "ur";
-  });
-
   const [settings, setSettings] = useState<UserSettings>(() => {
     try {
       const saved = localStorage.getItem("omnipost_settings");
@@ -189,7 +183,7 @@ export default function App() {
   // Alert toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
 
   const showToast = useCallback((msg: string) => {
     setToastMessage(msg);
@@ -254,33 +248,19 @@ export default function App() {
     const connected = params.get("connected");
     const connectError = params.get("connect_error");
     if (connected && workspace) {
-      showToast(
-        lang === "ur"
-          ? `${connected} اکاؤنٹ کنیکٹ ہو گیا!`
-          : `${connected} account connected!`
-      );
+      showToast(`${connected} account connected!`);
       void loadAccounts(workspace.id);
       window.history.replaceState({}, "", window.location.pathname);
     } else if (connectError) {
       showToast(`Connect failed: ${connectError}`);
       window.history.replaceState({}, "", window.location.pathname);
     }
-  }, [workspace, lang, loadAccounts, showToast]);
+  }, [workspace, loadAccounts, showToast]);
 
   // Save settings to localStorage
   useEffect(() => {
     localStorage.setItem("omnipost_settings", JSON.stringify(settings));
   }, [settings]);
-
-  // Save language to localStorage & adjust dir
-  useEffect(() => {
-    localStorage.setItem("omnipost_lang", lang);
-    document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
-  }, [lang]);
-
-  const handleToggleLang = () => {
-    setLang((prev) => (prev === "en" ? "ur" : "en"));
-  };
 
   const handleLogin = async () => {
     setLoginError(null);
@@ -348,7 +328,7 @@ export default function App() {
         publishNow: false,
       });
       await loadPosts(workspace.id);
-      showToast(lang === "ur" ? "ڈرافٹ کامیابی سے محفوظ ہو گیا!" : "Draft saved successfully!");
+      showToast("Draft saved successfully!");
     } catch (e) {
       showToast(e instanceof ApiError ? e.message : "Could not save the draft.");
     }
@@ -369,11 +349,7 @@ export default function App() {
       });
       await loadPosts(workspace.id);
       showToast(
-        lang === "ur"
-          ? `پوسٹ مقررہ وقت پر شیڈول ہو گئی! (${new Date(
-              scheduledPost.scheduledFor || ""
-            ).toLocaleString()})`
-          : `Post scheduled for ${new Date(scheduledPost.scheduledFor || "").toLocaleString()}!`
+        `Post scheduled for ${new Date(scheduledPost.scheduledFor || "").toLocaleString()}!`
       );
     } catch (e) {
       showToast(e instanceof ApiError ? e.message : "Could not schedule the post.");
@@ -391,7 +367,7 @@ export default function App() {
     try {
       await deleteContent(workspace.id, id);
       await loadPosts(workspace.id);
-      showToast(lang === "ur" ? "پوسٹ حذف ہو گئی" : "Post deleted");
+      showToast("Post deleted");
     } catch (e) {
       showToast(e instanceof ApiError ? e.message : "Could not delete the post.");
     }
@@ -422,7 +398,7 @@ export default function App() {
     setMedia(post.media);
     setSelectedPlatforms(post.selectedPlatforms);
     setActiveView("composer");
-    showToast(lang === "ur" ? "پوسٹ ایڈیٹر میں لوڈ ہو گئی" : "Post loaded into editor");
+    showToast("Post loaded into editor");
   };
 
   const handleResetForm = () => {
@@ -457,7 +433,7 @@ export default function App() {
     try {
       await completeManualPost(workspace.id, post.id, platformPostId);
       await loadPosts(workspace.id);
-      showToast(lang === "ur" ? "اسٹیٹس مکمل نشان زد ہو گیا!" : "Status marked as posted!");
+      showToast("Status marked as posted!");
     } catch (e) {
       showToast(e instanceof ApiError ? e.message : "Could not mark it posted yet.");
     }
@@ -549,14 +525,9 @@ export default function App() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-neutral-100/70 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
-      dir={lang === "ur" ? "rtl" : "ltr"}
-    >
+    <div className="min-h-screen bg-neutral-100/70 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans">
       {/* Navigation Header */}
       <Navbar
-        lang={lang}
-        onToggleLang={handleToggleLang}
         onOpenGuide={() => setGuideModalOpen(true)}
         onOpenSettings={() => setSettingsModalOpen(true)}
         scheduledCount={scheduledCount}
@@ -582,14 +553,10 @@ export default function App() {
             </div>
             <div>
               <p className="text-xs sm:text-sm font-bold">
-                {lang === "ur"
-                  ? "ایک بار لکھیں — ٹک ٹاک، انسٹاگرام، فیس بک اور واٹس ایپ اسٹیٹس پر ایک ساتھ پوسٹ کریں۔"
-                  : "Write once — post to TikTok, Instagram, Facebook & WhatsApp Status together."}
+                Write once — post to TikTok, Instagram, Facebook & WhatsApp Status together.
               </p>
               <p className="text-[11px] text-white/80">
-                {lang === "ur"
-                  ? "اصلی پبلشنگ، آپ کے کنیکٹڈ اکاؤنٹس سے۔ واٹس ایپ اسٹیٹس فون سے لگتا ہے۔"
-                  : "Real publishing from your connected accounts. WhatsApp Status goes from your phone."}
+                Real publishing from your connected accounts. WhatsApp Status goes from your phone.
               </p>
             </div>
           </div>
@@ -599,7 +566,7 @@ export default function App() {
             onClick={() => setGuideModalOpen(true)}
             className="text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-white text-neutral-900 hover:bg-neutral-100 transition-colors shadow-2xs cursor-pointer"
           >
-            {lang === "ur" ? "فری گائیڈ دیکھیں" : "View Free Setup"}
+            View Free Setup
           </button>
         </div>
 
@@ -607,9 +574,7 @@ export default function App() {
         {needsManual.length > 0 && (
           <div className="mb-6 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/40 text-xs space-y-2">
             <p className="font-semibold text-emerald-900 dark:text-emerald-200">
-              {lang === "ur"
-                ? "واٹس ایپ اسٹیٹس آپ کے فون کا انتظار کر رہا ہے:"
-                : "WhatsApp Status waiting on your phone:"}
+WhatsApp Status waiting on your phone:
             </p>
             {needsManual.map(({ post, result }) => (
               <div key={result.platformPostId} className="flex flex-wrap items-center justify-between gap-2 text-emerald-800 dark:text-emerald-300">
@@ -620,14 +585,12 @@ export default function App() {
                   disabled={!result.platformPostId}
                   className="px-3 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-lg transition-colors cursor-pointer"
                 >
-                  {lang === "ur" ? "میں نے اسٹیٹس لگا دیا" : "I posted the Status"}
+                  I posted the Status
                 </button>
               </div>
             ))}
             <p className="text-[11px] text-emerald-700 dark:text-emerald-400">
-              {lang === "ur"
-                ? "میڈیا اور کیپشن پبلش ونڈو میں تیار ہیں — واٹس ایپ کھولیں، Status → My Status، پھر یہاں مکمل کریں۔"
-                : "Media + caption are ready in the publish window — open WhatsApp, Status → My Status, then mark it done here."}
+Media + caption are ready in the publish window — open WhatsApp, Status → My Status, then mark it done here.
             </p>
           </div>
         )}
@@ -641,14 +604,13 @@ export default function App() {
               <PlatformSelector
                 selectedPlatforms={selectedPlatforms}
                 onChange={setSelectedPlatforms}
-                lang={lang}
                 contentLength={caption.length}
               />
 
               {/* Connected accounts */}
               <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-4 shadow-xs space-y-2">
                 <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                  {lang === "ur" ? "کنیکٹڈ اکاؤنٹس" : "Connected accounts"}
+                  Connected accounts
                 </p>
                 {selectedPlatforms.map((pid) => {
                   const conf = PLATFORMS.find((p) => p.id === pid);
@@ -659,10 +621,10 @@ export default function App() {
                     return (
                       <div key={pid} className="flex items-center justify-between gap-2 text-xs">
                         <span className="font-medium text-neutral-800 dark:text-neutral-200">
-                          {lang === "ur" ? conf.nameUrdu : conf.name}
+                          {conf.name}
                         </span>
                         <span className="text-emerald-600 font-medium">
-                          {lang === "ur" ? "کوئی لاگ ان نہیں — فون سے پوسٹ ہوتا ہے" : "No login needed — posted from your phone"}
+                          No login needed — posted from your phone
                         </span>
                       </div>
                     );
@@ -670,7 +632,7 @@ export default function App() {
                   return (
                     <div key={pid} className="flex items-center justify-between gap-2 text-xs">
                       <span className="font-medium text-neutral-800 dark:text-neutral-200">
-                        {lang === "ur" ? conf?.nameUrdu : conf?.name}
+                        {conf?.name}
                       </span>
                       {account ? (
                         <span className="flex items-center gap-2">
@@ -701,9 +663,7 @@ export default function App() {
                   );
                 })}
                 <p className="text-[11px] text-neutral-500">
-                  {lang === "ur"
-                    ? "کنیکٹ کرنے پر پلیٹ فارم کی اپنی سائٹ کھلے گی — وہاں اجازت دیں، پھر آپ واپس یہاں آ جائیں گے۔"
-                    : "Connecting opens the platform's own site — approve there and you come back here."}
+Connecting opens the platform's own site — approve there and you come back here.
                 </p>
               </div>
 
@@ -714,7 +674,6 @@ export default function App() {
                 media={media}
                 onChangeMedia={setMedia}
                 selectedPlatforms={selectedPlatforms}
-                lang={lang}
                 onOpenAIAssistant={() => setAiAssistantOpen(true)}
               />
 
@@ -722,7 +681,6 @@ export default function App() {
               <HashtagManager
                 hashtags={hashtags}
                 onChange={setHashtags}
-                lang={lang}
                 postContent={caption}
                 selectedPlatforms={selectedPlatforms}
               />
@@ -734,7 +692,7 @@ export default function App() {
                     type="button"
                     onClick={handleResetForm}
                     className="p-2 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-                    title={lang === "ur" ? "فارم صاف کریں" : "Reset Form"}
+                    title="Reset Form"
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
@@ -753,7 +711,7 @@ export default function App() {
                     onClick={handleLogout}
                     className="px-3 py-2 text-xs font-medium text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
                   >
-                    {lang === "ur" ? "لاگ آؤٹ" : "Sign out"}
+                    Sign out
                   </button>
                 </div>
 
@@ -791,7 +749,6 @@ export default function App() {
                 media={media}
                 selectedPlatforms={selectedPlatforms}
                 authorName={settings.authorName}
-                lang={lang}
               />
             </div>
           </div>
@@ -806,7 +763,6 @@ export default function App() {
                 onDeletePost={(id) => void handleDeletePost(id)}
                 onPublishPostNow={(post) => void handlePublishPostNowFromQueue(post)}
                 onEditPost={handleEditPostFromQueue}
-                lang={lang}
               />
             )}
           </div>
@@ -820,7 +776,6 @@ export default function App() {
         post={currentDraftPost}
         onPostPublished={() => void handlePostPublished()}
         workspaceId={workspace.id}
-        lang={lang}
       />
 
       <SchedulerModal
@@ -828,7 +783,6 @@ export default function App() {
         onClose={() => setSchedulerModalOpen(false)}
         post={currentDraftPost}
         onSchedulePost={(p) => void handleSchedulePost(p)}
-        lang={lang}
       />
 
       <AIAssistantModal
@@ -837,13 +791,11 @@ export default function App() {
         currentCaption={caption}
         media={media}
         onApplyVariation={(optimizedText) => setCaption(optimizedText)}
-        lang={lang}
       />
 
       <ZeroBudgetGuideModal
         isOpen={guideModalOpen}
         onClose={() => setGuideModalOpen(false)}
-        lang={lang}
       />
 
       <SettingsModal
@@ -851,7 +803,6 @@ export default function App() {
         onClose={() => setSettingsModalOpen(false)}
         settings={settings}
         onSaveSettings={setSettings}
-        lang={lang}
       />
     </div>
   );

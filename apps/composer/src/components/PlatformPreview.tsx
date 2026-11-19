@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MediaAttachment, PlatformId } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import {
   Heart,
   MessageCircle,
@@ -23,7 +23,6 @@ interface PlatformPreviewProps {
   media?: MediaAttachment;
   selectedPlatforms: PlatformId[];
   authorName: string;
-  lang: Language;
 }
 
 export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
@@ -32,9 +31,8 @@ export const PlatformPreview: React.FC<PlatformPreviewProps> = ({
   media,
   selectedPlatforms,
   authorName,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [activeTab, setActiveTab] = useState<PlatformId>(
     selectedPlatforms[0] || "linkedin"
   );

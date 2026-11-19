@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserSettings, PlatformId } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { PLATFORMS } from "../constants/platforms";
 import { Settings, X, Check, Save, Link2, User, Globe } from "lucide-react";
 
@@ -9,7 +9,6 @@ interface SettingsModalProps {
   onClose: () => void;
   settings: UserSettings;
   onSaveSettings: (settings: UserSettings) => void;
-  lang: Language;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -17,9 +16,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   settings,
   onSaveSettings,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [formData, setFormData] = useState<UserSettings>({ ...settings });
   const [savedSuccess, setSavedSuccess] = useState(false);
 
@@ -58,9 +56,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 {t.settingsTitle}
               </h3>
               <p className="text-xs text-neutral-500">
-                {lang === "ur"
-                  ? "ویب ہک، مصنف کا نام اور ہینڈلز سیٹ کریں"
-                  : "Webhook, author profile & custom social handles"}
+Webhook, author profile & custom social handles
               </p>
             </div>
           </div>
@@ -79,7 +75,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <div>
             <label className="font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5 flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-neutral-500" />
-              <span>{lang === "ur" ? "آپ کا نام یا برانڈ کا نام:" : "Creator / Brand Name:"}</span>
+              <span>Creator / Brand Name:</span>
             </label>
             <input
               type="text"
@@ -109,23 +105,21 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               className="w-full px-3 py-2 rounded-lg border border-neutral-200 dark:border-neutral-750 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-blue-500/40 font-mono text-[11px]"
             />
             <p className="text-[11px] text-neutral-500 mt-1">
-              {lang === "ur"
-                ? "اگر آپ Make.com یا n8n استعمال کر رہے ہیں تو اس کا مفت ویب ہک URL یہاں ڈالیں۔ بغیر اس کے بھی 1-کلک سے پوسٹنگ چلتی ہے۔"
-                : "Optional: Add your free Make/n8n webhook URL to auto-dispatch in background without opening browser tabs."}
+Optional: Add your free Make/n8n webhook URL to auto-dispatch in background without opening browser tabs.
             </p>
           </div>
 
           {/* Handles for each platform */}
           <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800 space-y-2.5">
             <p className="font-semibold text-neutral-700 dark:text-neutral-300">
-              {lang === "ur" ? "سوشل میڈیا ہینڈلز (Social Handles):" : "Custom Handles / URLs:"}
+              Custom Handles / URLs:
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {PLATFORMS.map((p) => (
                 <div key={p.id}>
                   <span className="text-[11px] text-neutral-500 block mb-0.5">
-                    {lang === "ur" ? p.nameUrdu : p.name}
+                    {p.name}
                   </span>
                   <input
                     type="text"

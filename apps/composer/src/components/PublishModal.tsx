@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlatformId, PlatformResult, SocialPost } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { PLATFORMS } from "../constants/platforms";
 import {
   CheckCircle2,
@@ -54,7 +54,6 @@ interface PublishModalProps {
   post: SocialPost;
   onPostPublished: (post: SocialPost) => void;
   workspaceId: string;
-  lang: Language;
 }
 
 const toApiPlatform = (pid: PlatformId): string => pid.toUpperCase();
@@ -67,9 +66,8 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   post,
   onPostPublished,
   workspaceId,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [results, setResults] = useState<Record<PlatformId, ResultEntry>>({} as Record<PlatformId, ResultEntry>);
   const [phase, setPhase] = useState<"idle" | "uploading" | "publishing" | "polling" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -251,11 +249,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
             </div>
             <div>
               <h3 className="text-base font-semibold text-neutral-900 dark:text-white">
-                {done
-                  ? t.publishedSuccess
-                  : lang === "ur"
-                  ? "تمام سوشل میڈیا پر شائع کریں"
-                  : "Publish to Selected Channels"}
+                {done ? t.publishedSuccess : "Publish to Selected Channels"}
               </h3>
               <p className="text-xs text-neutral-500">
                 {post.selectedPlatforms.length} {t.targetPlatforms.toLowerCase()}
@@ -302,7 +296,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
           {/* Platform Status List */}
           <div className="space-y-2">
             <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">
-              {lang === "ur" ? "پلیٹ فارم اسٹیٹس:" : "Platform Status:"}
+              Platform Status:
             </p>
 
             <div className="divide-y divide-neutral-100 dark:divide-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden bg-white dark:bg-neutral-900">
@@ -315,7 +309,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <span className="font-semibold text-neutral-900 dark:text-white">
-                          {lang === "ur" ? conf?.nameUrdu : conf?.name}
+                          {conf?.name}
                         </span>
                         {post.media && (
                           <span className="text-[10px] px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500 uppercase">
@@ -324,7 +318,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                         )}
                         {conf?.manualOnly && (
                           <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-medium">
-                            {lang === "ur" ? "دستی" : "Manual"}
+                            Manual
                           </span>
                         )}
                       </div>
@@ -383,7 +377,6 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                           note={r.manualActionNote ?? ""}
                           mediaUrls={r.mediaUrls ?? []}
                           caption={fullText}
-                          lang={lang}
                           onMarkedPosted={() => {
                             setResults((prev) => ({
                               ...prev,
@@ -403,13 +396,9 @@ export const PublishModal: React.FC<PublishModalProps> = ({
           <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/70 dark:border-blue-900/40 text-xs text-blue-900 dark:text-blue-200 flex items-start gap-2">
             <AlertCircle className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400 mt-0.5" />
             <div>
-              <p className="font-semibold">
-                {lang === "ur" ? "اصل پبلشنگ:" : "Real publishing:"}
-              </p>
+              <p className="font-semibold">Real publishing:</p>
               <p className="text-[11px] text-blue-800 dark:text-blue-300 mt-0.5 leading-relaxed">
-                {lang === "ur"
-                  ? "پوسٹ آپ کے کنیکٹڈ اکاؤنٹس سے اصلی پلیٹ فارم API کے ذریعے شائع ہوتی ہے۔ واٹس ایپ اسٹیٹس کا کوئی API نہیں — وہ آپ اپنے فون سے لگائیں گے، اوپر والا کارڈ دیکھیں۔"
-                  : "Posts publish through the real platform APIs from your connected accounts. WhatsApp Status has no API — post it from your phone with the card above."}
+Posts publish through the real platform APIs from your connected accounts. WhatsApp Status has no API — post it from your phone with the card above.
               </p>
             </div>
           </div>
@@ -418,9 +407,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
             <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-850 border border-neutral-200 dark:border-neutral-800 text-xs text-neutral-600 dark:text-neutral-400 flex items-start gap-2">
               <Clock className="w-4 h-4 shrink-0 mt-0.5" />
               <span>
-                {lang === "ur"
-                  ? "جو پلیٹ فارم ابھی قطار میں ہیں، وہ ورکر کے مکمل کرتے ہی Queue ٹیب میں اپڈیٹ ہو جائیں گے۔"
-                  : "Platforms still queued will update in the Queue tab as soon as the worker finishes them."}
+Platforms still queued will update in the Queue tab as soon as the worker finishes them.
               </span>
             </div>
           )}

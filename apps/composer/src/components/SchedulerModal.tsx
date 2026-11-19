@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SocialPost } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { Calendar, Clock, Sparkles, X, Check, ArrowRight } from "lucide-react";
 
 interface SchedulerModalProps {
@@ -8,7 +8,6 @@ interface SchedulerModalProps {
   onClose: () => void;
   post: SocialPost;
   onSchedulePost: (scheduledPost: SocialPost) => void;
-  lang: Language;
 }
 
 export const SchedulerModal: React.FC<SchedulerModalProps> = ({
@@ -16,9 +15,8 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
   onClose,
   post,
   onSchedulePost,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
 
   // Default to tomorrow 9:00 AM
   const defaultDate = new Date();
@@ -78,9 +76,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
                 {t.schedulePostBtn}
               </h3>
               <p className="text-xs text-neutral-500">
-                {lang === "ur"
-                  ? "مطلوبہ تاریخ اور وقت پر خودکار اشاعت مقرر کریں"
-                  : "Pick date and time to broadcast your post"}
+Pick date and time to broadcast your post
               </p>
             </div>
           </div>
@@ -98,7 +94,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
           {/* Quick Presets */}
           <div>
             <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2 block">
-              {lang === "ur" ? "فوری اوقات (Quick Presets):" : "Suggested Prime Times:"}
+              Suggested Prime Times:
             </label>
             <div className="grid grid-cols-2 gap-2">
               <button
@@ -107,7 +103,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
                 className="text-xs p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-850 hover:border-purple-400 text-left transition-colors"
               >
                 <div className="font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur" ? "1 گھنٹے بعد" : "In 1 Hour"}
+                  In 1 Hour
                 </div>
                 <div className="text-[10px] text-neutral-500">Quick queue</div>
               </button>
@@ -118,7 +114,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
                 className="text-xs p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-850 hover:border-purple-400 text-left transition-colors"
               >
                 <div className="font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur" ? "آج رات 8:00 بجے" : "Tonight 8:00 PM"}
+                  Tonight 8:00 PM
                 </div>
                 <div className="text-[10px] text-purple-600 dark:text-purple-400">
                   Prime evening engagement
@@ -131,7 +127,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
                 className="text-xs p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-850 hover:border-purple-400 text-left transition-colors"
               >
                 <div className="font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur" ? "کل صبح 9:00 بجے" : "Tomorrow 9:00 AM"}
+                  Tomorrow 9:00 AM
                 </div>
                 <div className="text-[10px] text-blue-600 dark:text-blue-400">
                   Best for LinkedIn & B2B
@@ -144,7 +140,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
                 className="text-xs p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-850 hover:border-purple-400 text-left transition-colors"
               >
                 <div className="font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur" ? "کل شام 6:00 بجے" : "Tomorrow 6:00 PM"}
+                  Tomorrow 6:00 PM
                 </div>
                 <div className="text-[10px] text-rose-600 dark:text-rose-400">
                   Best for TikTok & Instagram
@@ -158,7 +154,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
             <div>
               <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5 flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-neutral-500" />
-                <span>{lang === "ur" ? "تاریخ منتخب کریں" : "Select Date"}</span>
+                <span>Select Date</span>
               </label>
               <input
                 type="date"
@@ -172,7 +168,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
             <div>
               <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5 flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-neutral-500" />
-                <span>{lang === "ur" ? "وقت منتخب کریں" : "Select Time"}</span>
+                <span>Select Time</span>
               </label>
               <input
                 type="time"
@@ -210,7 +206,7 @@ export const SchedulerModal: React.FC<SchedulerModalProps> = ({
           >
             <Check className="w-3.5 h-3.5" />
             <span>
-              {lang === "ur" ? "شیڈول کنفرم کریں" : "Confirm Schedule"}
+              Confirm Schedule
             </span>
           </button>
         </div>

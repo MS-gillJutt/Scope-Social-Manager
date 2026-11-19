@@ -3,7 +3,6 @@ export type PlatformId = "linkedin" | "tiktok" | "instagram" | "facebook" | "twi
 export interface PlatformConfig {
   id: PlatformId;
   name: string;
-  nameUrdu: string;
   color: string;
   bgColor: string;
   borderColor: string;
@@ -84,7 +83,6 @@ export interface SocialPost {
 
 export interface UserSettings {
   webhookUrl: string;
-  defaultLanguage: "en" | "ur";
   authorName: string;
   socialHandles: Partial<Record<PlatformId, string>>;
   autoCopyMediaLink: boolean;

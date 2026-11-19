@@ -1,17 +1,14 @@
 import React from "react";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import {
   Share2,
   Calendar,
   Settings,
   HelpCircle,
-  Languages,
   Zap,
 } from "lucide-react";
 
 interface NavbarProps {
-  lang: Language;
-  onToggleLang: () => void;
   onOpenGuide: () => void;
   onOpenSettings: () => void;
   scheduledCount: number;
@@ -20,15 +17,13 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  lang,
-  onToggleLang,
   onOpenGuide,
   onOpenSettings,
   scheduledCount,
   activeView,
   setActiveView,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
 
   return (
     <header className="sticky top-0 z-30 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
@@ -101,17 +96,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <HelpCircle className="w-3.5 h-3.5" />
             <span className="hidden lg:inline">{t.guideTitle}</span>
-          </button>
-
-          {/* Language Toggle (English / اردو) */}
-          <button
-            type="button"
-            onClick={onToggleLang}
-            className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg border border-neutral-200 dark:border-neutral-700 transition-colors"
-            title="Switch Language / زبان تبدیل کریں"
-          >
-            <Languages className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span>{lang === "en" ? "اردو" : "English"}</span>
           </button>
 
           {/* Settings Button */}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { Sparkles, Check, X, Loader2, Copy } from "lucide-react";
 import { MediaAttachment } from "../types";
 import { optimizeCaption } from "../lib/api";
@@ -10,7 +10,6 @@ interface AIAssistantModalProps {
   currentCaption: string;
   media?: MediaAttachment;
   onApplyVariation: (text: string) => void;
-  lang: Language;
 }
 
 export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
@@ -19,9 +18,8 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
   currentCaption,
   media,
   onApplyVariation,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [tone, setTone] = useState("engaging");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<{
@@ -46,7 +44,7 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
         content: currentCaption || "Excited to share our brand new updates and insights!",
         mediaType: media?.type || "none",
         tone,
-        language: lang,
+        language: "en",
       });
       setResults(data);
     } catch (err) {
@@ -93,14 +91,14 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
           {/* Tone Selector */}
           <div className="flex flex-wrap items-center justify-between gap-2">
             <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-              {lang === "ur" ? "انداز گفتگو (Tone):" : "Voice & Tone:"}
+              Voice & Tone:
             </label>
             <div className="flex flex-wrap gap-1.5">
               {[
-                { id: "engaging", label: "Engaging & Viral", labelUrdu: "پُرکشش و وائرل" },
-                { id: "professional", label: "Professional", labelUrdu: "پیشہ ورانہ" },
-                { id: "storytelling", label: "Storytelling", labelUrdu: "کہانی کے انداز میں" },
-                { id: "casual", label: "Short & Punchy", labelUrdu: "مختصر اور تیز" },
+                { id: "engaging", label: "Engaging & Viral" },
+                { id: "professional", label: "Professional" },
+                { id: "storytelling", label: "Storytelling" },
+                { id: "casual", label: "Short & Punchy" },
               ].map((tOption) => (
                 <button
                   key={tOption.id}
@@ -112,7 +110,7 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
                       : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700"
                   }`}
                 >
-                  {lang === "ur" ? tOption.labelUrdu : tOption.label}
+                  {tOption.label}
                 </button>
               ))}
             </div>
@@ -124,9 +122,7 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
               <Sparkles className="w-8 h-8 text-purple-600 mx-auto animate-bounce" />
               <div>
                 <p className="text-sm font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur"
-                    ? "ایک کلک سے تمام پلیٹ فارمز کے لیے الگ الگ خوبصورت کیپشنز بنائیں"
-                    : "Generate Platform-Perfect Variations with Gemini AI"}
+Generate Platform-Perfect Variations with Gemini AI
                 </p>
                 <p className="text-xs text-neutral-500 max-w-md mx-auto mt-1">
                   LinkedIn gets thought-leadership breaks; Twitter gets a 260-character hook; TikTok gets a viral video intro.

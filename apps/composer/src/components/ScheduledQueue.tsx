@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlatformId, SocialPost } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { PLATFORMS } from "../constants/platforms";
 import {
   Calendar,
@@ -20,7 +20,6 @@ interface ScheduledQueueProps {
   onDeletePost: (id: string) => void;
   onPublishPostNow: (post: SocialPost) => void;
   onEditPost: (post: SocialPost) => void;
-  lang: Language;
 }
 
 export const ScheduledQueue: React.FC<ScheduledQueueProps> = ({
@@ -28,9 +27,8 @@ export const ScheduledQueue: React.FC<ScheduledQueueProps> = ({
   onDeletePost,
   onPublishPostNow,
   onEditPost,
-  lang,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [filter, setFilter] = useState<"all" | "scheduled" | "published" | "draft">("all");
 
   const filteredPosts = posts.filter((p) => {
@@ -40,7 +38,7 @@ export const ScheduledQueue: React.FC<ScheduledQueueProps> = ({
 
   const getPlatformName = (id: PlatformId) => {
     const found = PLATFORMS.find((p) => p.id === id);
-    return lang === "ur" ? found?.nameUrdu || id : found?.name || id;
+    return found?.name || id;
   };
 
   return (
@@ -59,10 +57,10 @@ export const ScheduledQueue: React.FC<ScheduledQueueProps> = ({
         {/* Filter Pills */}
         <div className="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg text-xs">
           {[
-            { id: "all", label: "All", labelUrdu: "تمام" },
-            { id: "scheduled", label: t.statusScheduled, labelUrdu: "شیڈولڈ" },
-            { id: "published", label: t.statusPublished, labelUrdu: "شائع شدہ" },
-            { id: "draft", label: t.statusDraft, labelUrdu: "ڈرافٹس" },
+            { id: "all", label: "All" },
+            { id: "scheduled", label: t.statusScheduled },
+            { id: "published", label: t.statusPublished },
+            { id: "draft", label: t.statusDraft },
           ].map((item) => (
             <button
               key={item.id}
@@ -74,7 +72,7 @@ export const ScheduledQueue: React.FC<ScheduledQueueProps> = ({
                   : "text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200"
               }`}
             >
-              {lang === "ur" ? item.labelUrdu : item.label}
+              {item.label}
             </button>
           ))}
         </div>

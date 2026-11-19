@@ -1,23 +1,21 @@
 import React from "react";
 import { PlatformId } from "../types";
 import { PLATFORMS } from "../constants/platforms";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { Check, Linkedin, Video, Instagram, Facebook, Twitter } from "lucide-react";
 
 interface PlatformSelectorProps {
   selectedPlatforms: PlatformId[];
   onChange: (platforms: PlatformId[]) => void;
-  lang: Language;
   contentLength: number;
 }
 
 export const PlatformSelector: React.FC<PlatformSelectorProps> = ({
   selectedPlatforms,
   onChange,
-  lang,
   contentLength,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
 
   const togglePlatform = (id: PlatformId) => {
     if (selectedPlatforms.includes(id)) {
@@ -113,7 +111,7 @@ export const PlatformSelector: React.FC<PlatformSelectorProps> = ({
 
               <div>
                 <p className="text-sm font-semibold text-neutral-900 dark:text-white">
-                  {lang === "ur" ? platform.nameUrdu : platform.name}
+                  {platform.name}
                 </p>
                 {platform.note && (
                   <p className="text-[11px] leading-snug text-neutral-500 dark:text-neutral-400 mt-0.5">

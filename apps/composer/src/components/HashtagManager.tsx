@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NICHE_HASHTAGS } from "../constants/platforms";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { Hash, Sparkles, Plus, X, Copy, Check } from "lucide-react";
 import { PlatformId } from "../types";
 import { generateHashtags } from "../lib/api";
@@ -8,7 +8,6 @@ import { generateHashtags } from "../lib/api";
 interface HashtagManagerProps {
   hashtags: string[];
   onChange: (hashtags: string[]) => void;
-  lang: Language;
   postContent: string;
   selectedPlatforms: PlatformId[];
 }
@@ -16,11 +15,10 @@ interface HashtagManagerProps {
 export const HashtagManager: React.FC<HashtagManagerProps> = ({
   hashtags,
   onChange,
-  lang,
   postContent,
   selectedPlatforms,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const [customTag, setCustomTag] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -66,7 +64,7 @@ export const HashtagManager: React.FC<HashtagManagerProps> = ({
         content: postContent,
         platforms: selectedPlatforms,
         count: 8,
-        language: lang,
+        language: "en",
       });
       if (Array.isArray(data.hashtags)) {
         const unique = Array.from(new Set([...hashtags, ...data.hashtags]));
@@ -197,7 +195,7 @@ export const HashtagManager: React.FC<HashtagManagerProps> = ({
               onClick={() => addNicheTags(niche.tags)}
               className="text-[11px] px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
             >
-              + {lang === "ur" ? niche.labelUrdu : niche.label}
+              + {niche.label}
             </button>
           ))}
         </div>

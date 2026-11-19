@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { MediaAttachment, PlatformId } from "../types";
-import { Language, TRANSLATIONS } from "../constants/translations";
+import { TRANSLATIONS } from "../constants/translations";
 import { PLATFORMS } from "../constants/platforms";
 import {
   Image as ImageIcon,
@@ -19,7 +19,6 @@ interface PostComposerProps {
   media?: MediaAttachment;
   onChangeMedia: (media?: MediaAttachment) => void;
   selectedPlatforms: PlatformId[];
-  lang: Language;
   onOpenAIAssistant: () => void;
 }
 
@@ -29,10 +28,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
   media,
   onChangeMedia,
   selectedPlatforms,
-  lang,
   onOpenAIAssistant,
 }) => {
-  const t = TRANSLATIONS[lang];
+  const t = TRANSLATIONS.en;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -135,7 +133,6 @@ export const PostComposer: React.FC<PostComposerProps> = ({
           onChange={(e) => onChangeCaption(e.target.value)}
           placeholder={t.captionPlaceholder}
           className="w-full text-sm leading-relaxed p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-750 bg-white dark:bg-neutral-850 text-neutral-900 dark:text-white placeholder:text-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all resize-y"
-          dir={lang === "ur" ? "auto" : "ltr"}
         />
 
         {/* Character Limit Alerts */}

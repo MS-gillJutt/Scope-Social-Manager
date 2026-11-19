@@ -4,7 +4,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "linkedin",
     name: "LinkedIn",
-    nameUrdu: "لنکڈ اِن",
     color: "#0A66C2",
     bgColor: "bg-[#0A66C2]/10",
     borderColor: "border-[#0A66C2]",
@@ -22,7 +21,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "tiktok",
     name: "TikTok",
-    nameUrdu: "ٹک ٹاک",
     color: "#000000",
     bgColor: "bg-black/10",
     borderColor: "border-black dark:border-neutral-700",
@@ -37,7 +35,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "instagram",
     name: "Instagram",
-    nameUrdu: "انسٹاگرام",
     color: "#E1306C",
     bgColor: "bg-[#E1306C]/10",
     borderColor: "border-[#E1306C]",
@@ -52,7 +49,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "facebook",
     name: "Facebook",
-    nameUrdu: "فیس بک",
     color: "#1877F2",
     bgColor: "bg-[#1877F2]/10",
     borderColor: "border-[#1877F2]",
@@ -67,7 +63,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "whatsapp",
     name: "WhatsApp",
-    nameUrdu: "واٹس ایپ",
     color: "#25D366",
     bgColor: "bg-[#25D366]/10",
     borderColor: "border-[#25D366]",
@@ -84,7 +79,6 @@ export const PLATFORMS: PlatformConfig[] = [
   {
     id: "twitter",
     name: "Twitter / X",
-    nameUrdu: "ٹویٹر / ایکس",
     color: "#0f1419",
     bgColor: "bg-neutral-900/10",
     borderColor: "border-neutral-900 dark:border-neutral-600",
@@ -101,35 +95,29 @@ export const PLATFORMS: PlatformConfig[] = [
   },
 ];
 
-export const NICHE_HASHTAGS: Record<string, { label: string; labelUrdu: string; tags: string[] }> = {
+export const NICHE_HASHTAGS: Record<string, { label: string; tags: string[] }> = {
   trending: {
     label: "Trending & Viral",
-    labelUrdu: "وائرل اور ٹرینڈنگ",
     tags: ["#viral", "#trending", "#explorepage", "#fyp", "#contentcreator", "#growth", "#instagood"],
   },
   tech: {
     label: "Technology & Coding",
-    labelUrdu: "ٹیکنالوجی اور کوڈنگ",
     tags: ["#tech", "#softwareengineering", "#coding", "#webdev", "#developer", "#innovation", "#programming"],
   },
   ai: {
     label: "AI & Innovation",
-    labelUrdu: "مصنوعی ذہانت (AI)",
     tags: ["#ArtificialIntelligence", "#AI", "#MachineLearning", "#GenAI", "#FutureOfWork", "#DeepTech"],
   },
   business: {
     label: "Business & Freelancing",
-    labelUrdu: "بزنس اور فری لانسنگ",
     tags: ["#entrepreneur", "#businessgrowth", "#freelancing", "#startup", "#marketing", "#leadership", "#ecommerce"],
   },
   pakistan: {
     label: "Pakistan / Urdu Community",
-    labelUrdu: "پاکستانی اور اردو کمیونٹی",
     tags: ["#pakistan", "#urdupoetry", "#lahore", "#karachi", "#islamabad", "#urducontent", "#digitalpakistan"],
   },
   motivation: {
     label: "Motivation & Life",
-    labelUrdu: "موٹیویشن اور حکمت",
     tags: ["#motivation", "#mindset", "#success", "#dailyquote", "#inspiration", "#discipline", "#goals"],
   },
 };
